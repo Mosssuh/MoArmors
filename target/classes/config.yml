@@ -1,0 +1,37 @@
+Config:
+  time-format:
+    year: 'y'
+    month: 'm'
+    week: 'w'
+    day: 'd'
+    hour: 'h'
+    minute: 'm'
+    second: 's'
+  # This interval is used to update the item lore, name of active armor
+  update-armor-info-interval: 5
+  # It is used for check and save in cache the active armor if for some reason the detectors do
+  # not detect the armor pieces.
+  check-armor-interval: 5
+  # Disable the actions of the items and don't receive rewards.
+  actions: true
+  # Disable the option to receive exp in items and level up items.
+  upgrades: true
+
+  # These two options are to activate only certain classes of the events, if in exp-events
+  # is only BLOCK_BREAK, only that way of raising exp will be activated, or if in actions-events
+  # is only PLAYER_ATTACK, only the combat class will be activated.
+  exp-events:
+    - 'BLOCK_BREAK'
+    - 'PLAYER_KILLS'
+  actions-events:
+    - 'BLOCK_BREAK'
+    - 'PLAYER_ATTACK'
+
+  # Conflicts is useful to don't have active pieces with the conflict tags
+  # or codes. And you can set how many active pieces people can have (Max 4).
+  # Format: - '<Conflict Type>: <conflicted items> -> <how many pieces can have active>'
+  #                 Code
+  #                 Tags
+  conflicts:
+    - 'Tags: Tokens -> 2'
+Armors:

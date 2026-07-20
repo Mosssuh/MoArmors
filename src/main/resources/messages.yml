@@ -1,0 +1,22 @@
+INVALID_CODE: '&8[&bMoArmors&8] &cYou''re indicating an invalid code!'
+INVALID_AMOUNT: '&8[&bMoArmors&8] &cYou''re indicating an invalid amount!'
+INVALID_PLAYER: '&8[&bMoArmors&8] &cThe player is offline!'
+INVALID_PIECE: '&cThat isn''t a piece!'
+
+NO_PERMISSION: '&8[&bMoArmors&8] &cYou don''t have permission!'
+
+COMMAND_GIVE_PIECE_SENDER: '&8[&bMoArmors&8] &aYou gave %amount% %piece_type% from %code% to %player%'
+COMMAND_GIVE_ALL_PIECE_SENDER: '&8[&bMoArmors&8] &aYou gave %amount% %piece_type% from %code% to all online players!'
+COMMAND_GIVE_PIECE_RECEIVER: '&8[&bMoArmors&8] &aYou received %amount% %piece_type% from %code%!'
+
+COMMAND_PIECE_ADD_EXP_RECEIVER: '&8[&bMoArmors&8] &aYour %piece_name% has received %new_exp% exp.'
+COMMAND_PIECE_ADD_EXP_SENDER: '&8[&bMoArmors&8] &aThe %piece_type% of %player% has received %new_exp% exp.'
+COMMAND_PIECE_SET_EXP_RECEIVER: '&8[&bMoArmors&8] &aYour %piece_name% exp has established to %new_exp% exp.'
+COMMAND_PIECE_SET_EXP_SENDER: '&8[&bMoArmors&8] &aThe exp of the %piece_type% of %player% has established to %new_exp% exp.'
+
+COMMAND_PIECE_ADD_LEVEL_RECEIVER: '&8[&bMoArmors&8] &aYour %piece_name% has received %new_level% level(s).'
+COMMAND_PIECE_ADD_LEVEL_SENDER: '&8[&bMoArmors&8] &aThe %piece_type% of %player% has received %new_level% level(s).'
+COMMAND_PIECE_SET_LEVEL_RECEIVER: '&8[&bMoArmors&8] &aYour %piece_name% level has established to %new_level% level.'
+COMMAND_PIECE_SET_LEVEL_SENDER: '&8[&bMoArmors&8] &aThe level of the %piece_type% of %player% has established to %new_level% level.'
+
+PIECE_LEVEL_UP: '&8[&bMoArmors&8] &aYour piece %piece_name% leveled up to %level%.'

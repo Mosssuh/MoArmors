@@ -1,0 +1,15 @@
+name: MoArmors
+version: '${project.version}'
+main: mv.mossuh.moarmors.MoArmors
+api-version: '1.13'
+
+depend:
+  - MoCore
+
+softdepend:
+  - MoBoosters
+
+commands:
+  moarmors:
+    aliases:
+      - moarmor

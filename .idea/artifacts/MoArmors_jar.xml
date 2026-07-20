@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MoArmors:jar">
+    <output-path>$USER_HOME$/Escritorio/MoJars</output-path>
+    <root id="archive" name="MoArmors.jar">
+      <element id="module-output" name="MoArmors" />
+    </root>
+  </artifact>
+</component>

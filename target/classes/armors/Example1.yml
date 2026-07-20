@@ -1,0 +1,169 @@
+Armors:
+  TokensArmor:
+    code: TokensArmor
+    tags: Tokens, Armor
+    variables:
+      - 'tokens_generator -> 0'
+    upgrades:
+      max-level: 50
+      cost-per-level: 5000
+      message:
+        progress:
+          - '&e ❙ &fProgress: &a%exp%&7/&a%cost%'
+        maxed-progress:
+          - '&e ❙ &fProgress: &c&lMAX LEVEL'
+    exp:
+      BLOCK_BREAK:
+        - 'ALL -> 1'
+    pieces-info:
+      HELMET:
+        material: DIAMOND_HELMET
+        data: 0
+        name: '&e&lTokens &f❙ &fHelmet'
+        lore:
+          - ''
+          - '&7&o(( Equip this piece and receive'
+          - '&7&oboost of tokens ))'
+          - ''
+          - '&e&lINFO'
+          - '&e ❙ &fLevel: &a%level%&7/&a%max_level%'
+          - ''
+          - '&e&lBOOSTS'
+          - '&e ❙ &fBoost: &e+{local_math_%level%/200}'
+          - ''
+          - '&e&lEXTRA ABILITIES'
+          - '&e ❙ &fKeys Generator: {local_changeoutput_!=_input:%variable_{tokens_generator}%_matcher:0_ifmatch:&eActive_else:&cLevel 25 to Unlock}'
+          - '&r     &8Receive tokens keys'
+          - '&r     &8when you have full set.'
+          - ''
+          - '%progress%'
+          - ''
+      CHESTPLATE:
+        material: DIAMOND_CHESTPLATE
+        data: 0
+        name: '&e&lTokens &f❙ &fChestplate'
+        lore:
+          - ''
+          - '&7&o(( Equip this piece and receive'
+          - '&7&oboost of tokens ))'
+          - ''
+          - '&e&lINFO'
+          - '&e ❙ &fLevel: &a%level%&7/&a%max_level%'
+          - ''
+          - '&e&lBOOSTS'
+          - '&e ❙ &fBoost: &e+{local_math_%level%/200}'
+          - ''
+          - '&e&lEXTRA ABILITIES'
+          - '&e ❙ &fKeys Generator: {local_changeoutput_!=_input:%variable_{tokens_generator}%_matcher:0_ifmatch:&eActive_else:&cLevel 25 to Unlock}'
+          - '&r     &8Receive tokens keys'
+          - '&r     &8when you have full set.'
+          - ''
+          - '%progress%'
+          - ''
+      LEGGINGS:
+        material: DIAMOND_LEGGINGS
+        data: 0
+        name: '&e&lTokens &f❙ &fLeggings'
+        lore:
+          - ''
+          - '&7&o(( Equip this piece and receive'
+          - '&7&oboost of tokens ))'
+          - ''
+          - '&e&lINFO'
+          - '&e ❙ &fLevel: &a%level%&7/&a%max_level%'
+          - ''
+          - '&e&lBOOSTS'
+          - '&e ❙ &fBoost: &e+{local_math_%level%/200}'
+          - ''
+          - '&e&lEXTRA ABILITIES'
+          - '&e ❙ &fKeys Generator: {local_changeoutput_!=_input:%variable_{tokens_generator}%_matcher:0_ifmatch:&eActive_else:&cLevel 25 to Unlock}'
+          - '&r     &8Receive tokens keys'
+          - '&r     &8when you have full set.'
+          - ''
+          - '%progress%'
+          - ''
+      BOOTS:
+        material: DIAMOND_BOOTS
+        data: 0
+        name: '&e&lTokens &f❙ &fBoots'
+        lore:
+          - ''
+          - '&7&o(( Equip this piece and receive'
+          - '&7&oboost of tokens ))'
+          - ''
+          - '&e&lINFO'
+          - '&e ❙ &fLevel: &a%level%&7/&a%max_level%'
+          - ''
+          - '&e&lBOOSTS'
+          - '&e ❙ &fBoost: &e+{local_math_%level%/200}'
+          - ''
+          - '&e&lEXTRA ABILITIES'
+          - '&e ❙ &fKeys Generator: {local_changeoutput_!=_input:%variable_{tokens_generator}%_matcher:0_ifmatch:&eActive_else:&cLevel 25 to Unlock}'
+          - '&r     &8Receive tokens keys'
+          - '&r     &8when you have full set.'
+          - ''
+          - '%progress%'
+          - ''
+    actions:
+      default:
+        AddTokensCheck1:
+          event: BLOCK_BREAK
+          requirements:
+            - '[eval] %helmet_code% equals TokensArmor'
+            - '[eval] %chestplate_code% equals TokensArmor'
+            - '[eval] %leggings_code% equals TokensArmor'
+            - '[eval] %boots_code% equals TokensArmor'
+            - '[eval] %helmet_variable_{tokens_generator}% == 1'
+            - '[eval] %chestplate_variable_{tokens_generator}% == 1'
+            - '[eval] %leggings_variable_{tokens_generator}% == 1'
+            - '[eval] %boots_variable_{tokens_generator}% == 1'
+          rewards:
+            - '[CHANCE -> 100] EXECUTE_ACTION -> AddTokensCheck2'
+        AddTokensCheck2:
+          cancel_action: true
+          rewards:
+            - '[CHANCE -> 0.01] CONSOLE_COMMAND -> keys add %player_name% {random_1-5}'
+        HelmetAbilityActivator:
+          event: BLOCK_BREAK
+          requirements:
+            - '[eval] %helmet_code% equals TokensArmor'
+            - '[eval] %helmet_variable_{tokens_generator}% == 0'
+            - '[eval] %helmet_level% == 25'
+          rewards:
+            - '[CHANCE -> 100] SET_VARIABLE:HELMET -> tokens_generator::1 && MESSAGE -> &e&lABILITY! &aYour helmet unlock Tokens Generator ability.'
+        ChestplateAbilityActivator:
+          event: BLOCK_BREAK
+          requirements:
+            - '[eval] %chestplate_code% equals TokensArmor'
+            - '[eval] %chestplate_variable_{tokens_generator}% == 0'
+            - '[eval] %chestplate_level% == 25'
+          rewards:
+            - '[CHANCE -> 100] SET_VARIABLE:CHESTPLATE -> tokens_generator::1 && MESSAGE -> &e&lABILITY! &aYour chestplate unlock Tokens Generator ability.'
+        LeggingsAbilityActivator:
+          event: BLOCK_BREAK
+          requirements:
+            - '[eval] %leggings_code% equals TokensArmor'
+            - '[eval] %leggings_variable_{tokens_generator}% == 0'
+            - '[eval] %leggings_level% == 25'
+          rewards:
+            - '[CHANCE -> 100] SET_VARIABLE:LEGGINGS -> tokens_generator::1 && MESSAGE -> &e&lABILITY! &aYour leggings unlock Tokens Generator ability.'
+        BootsAbilityActivator:
+          event: BLOCK_BREAK
+          requirements:
+            - '[eval] %boots_code% equals TokensArmor'
+            - '[eval] %boots_variable_{tokens_generator}% == 0'
+            - '[eval] %boots_level% == 25'
+          rewards:
+            - '[CHANCE -> 100] SET_VARIABLE:BOOTS -> tokens_generator::1 && MESSAGE -> &e&lABILITY! &aYour boots unlock Tokens Generator ability.'
+      boosters:
+        Tokens:
+          multiplier: BOOST_PER_LEVEL
+          type: PERSONAL
+          applicator: EDPRISON
+          boosted: TOKENS
+          boost: 0.005
+          requirements:
+            - '[eval] %helmet_code% equals TokensArmor'
+            - '[eval] %chestplate_code% equals TokensArmor'
+            - '[eval] %leggings_code% equals TokensArmor'
+            - '[eval] %boots_code% equals TokensArmor'
