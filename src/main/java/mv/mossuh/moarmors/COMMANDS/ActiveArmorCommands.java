@@ -11,6 +11,7 @@ import mv.mossuh.moarmors.CONFIGS.Config.Config;
 import mv.mossuh.moarmors.CONFIGS.Messages;
 import mv.mossuh.moarmors.UTILITIES.UtilString;
 import mv.mossuh.mocore.UTILITIES.ARGS.VariableArgs.VariableArg;
+import mv.mossuh.mocore.VERSION.ServerVersion;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -75,7 +76,11 @@ public class ActiveArmorCommands {
                             UtilString.get("&r").hex().sendMessage(player);
                             UtilString.get("&8--------------------------------------").hex().sendMessage(player);
                             UtilString.get("&r").hex().sendMessage(player);
+                            if (ServerVersion.isAtLeast(ServerVersion.MC1_13)) {
+                                UtilString.get("&bMaterial: &7" + itemStack.getType().name()).hex().sendMessage(player);
+                            } else {
                             UtilString.get("&bMaterial: &7" + itemStack.getType().name() + ":" + itemStack.getData().getData()).hex().sendMessage(player);
+                            }
                             if (piece.isPiece()) {
                                 UtilString.get("&bCode: &7" + code).hex().sendMessage(player);
                                 UtilString.get("&bLevel: &7" + level).hex().sendMessage(player);

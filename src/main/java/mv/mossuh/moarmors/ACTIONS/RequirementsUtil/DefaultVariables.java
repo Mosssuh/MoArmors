@@ -6,6 +6,7 @@ import mv.mossuh.moarmors.CONFIGS.Armors.Armor.ConfigArmor;
 import mv.mossuh.moarmors.CONFIGS.Armors.ItemInfo.ArmorUtil.ArmorIdentifier;
 import mv.mossuh.moarmors.UTILITIES.UtilString;
 import mv.mossuh.mocore.UTILITIES.ARGS.VariableArgs.VariableArg;
+import mv.mossuh.mocore.VERSION.ServerVersion;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -68,7 +69,7 @@ public class DefaultVariables {
         if (itemStack != null && !itemStack.getType().equals(Material.AIR)) {
             durability = itemStack.getDurability();
             material = itemStack.getType().name();
-            data = itemStack.getData().getData();
+            data = !ServerVersion.isAtLeast(ServerVersion.MC1_13) ? itemStack.getData().getData() : -1;
             amount = itemStack.getAmount();
             if (itemStack.hasItemMeta()) {
                 ItemMeta meta = itemStack.getItemMeta();
@@ -105,13 +106,13 @@ public class DefaultVariables {
         String cost = piece.getCost()+"";
         String maxLevel = configArmor.getUpgrades().getMaxLevel()+"";
 
-        variables.add(new VariableArg("%itemstack_is_vpiece%", isPiece));
-        variables.add(new VariableArg("%itemstack_vpiece_level%", level));
-        variables.add(new VariableArg("%itemstack_vpiece_exp%", exp));
-        variables.add(new VariableArg("%itemstack_vpiece_cost%", cost));
-        variables.add(new VariableArg("%itemstack_vpiece_max_level%", maxLevel));
-        variables.add(new VariableArg("%itemstack_vpiece_tags%", tags));
-        variables.add(new VariableArg("%itemstack_vpiece_code%", code));
+        variables.add(new VariableArg("%itemstack_is_piece%", isPiece));
+        variables.add(new VariableArg("%itemstack_piece_level%", level));
+        variables.add(new VariableArg("%itemstack_piece_exp%", exp));
+        variables.add(new VariableArg("%itemstack_piece_cost%", cost));
+        variables.add(new VariableArg("%itemstack_piece_max_level%", maxLevel));
+        variables.add(new VariableArg("%itemstack_piece_tags%", tags));
+        variables.add(new VariableArg("%itemstack_piece_code%", code));
         // %itemstack_vpiece_variable_{<variable}%
         for (VariableArg variable : pieceVariables) {
             variables.add(new VariableArg("%itemstack_vpiece_variable_{" + variable.getVariable() + "}%", variable.getValue()));
@@ -134,11 +135,11 @@ public class DefaultVariables {
         if (block != null && !block.getType().equals(Material.AIR)) {
             Location location = block.getLocation();
             String type = block.getType().name();
-            String data = block.getData()+"";
+            String data = !ServerVersion.isAtLeast(ServerVersion.MC1_13) ? block.getData()+"" : "-1";
             variables.add(new VariableArg("%event_entity%", type));
             variables.add(new VariableArg("%event_data%", data));
             variables.add(new VariableArg("%block%", type));
-            variables.add(new VariableArg("%block_data%", block.getData() + ""));
+            variables.add(new VariableArg("%block_data%", data));
             variables.add(new VariableArg("%block_x%", location.getBlockX() + ""));
             variables.add(new VariableArg("%block_y%", location.getBlockY() + ""));
             variables.add(new VariableArg("%block_z%", location.getBlockZ() + ""));

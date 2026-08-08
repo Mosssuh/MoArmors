@@ -1,6 +1,5 @@
 package mv.mossuh.moarmors.UTILITIES;
 
-import mv.mossuh.moarmors.EVENTS.MoBoosters.PieceExpBooster;
 import mv.mossuh.moarmors.CONFIGS.Config.Config;
 import mv.mossuh.moarmors.EVENTS.MoBoosters.RewardBoosters;
 import mv.mossuh.moarmors.MoArmors;
@@ -26,7 +25,6 @@ public class PluginChecker implements Listener {
                 if (Config.ACTIONS) {
                     instance.getServer().getPluginManager().registerEvents(new RewardBoosters(), instance);
                 }
-                instance.getServer().getPluginManager().registerEvents(new PieceExpBooster(), instance);
                 UtilString.get("&8[" + Config.PREFIX + "&8] &aDetected MoBoosters, used as soft-depend. Enabling classes.").hex().sendMessageInConsole();
                 break;
         }

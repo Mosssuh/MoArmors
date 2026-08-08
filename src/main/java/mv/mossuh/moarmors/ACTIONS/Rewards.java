@@ -159,7 +159,7 @@ public class Rewards {
                                         location = player.getLocation();
                                     }
                                     reward = UtilString.get(randomSelectedReward.getReward()).hex().setRandomNumberVariable()
-                                            .setVariables(variables).setVariables(actionVariables).setPlaceholders(entityReceiver).setChangeOutputPlaceholder().setMathPlaceholder()
+                                            .setVariables(variables).setVariables(actionVariables).setPlaceholders(player).setChangeOutputPlaceholder().setMathPlaceholder()
                                             .setTimeFormatter().apply();
 
                                     EntityType entityReceiverType = EntityType.UNKNOWN;
