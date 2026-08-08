@@ -13,8 +13,8 @@ public class Exp {
 
     public Exp(ExpType type, List<String> expEntitiesAsString, List<EntityExp> expEntities) {
         if (type != null) { this.type = type; }
-        if (expEntitiesAsString != null) { this.expEntities = expEntities; }
-        this.expEntitiesAsString = expEntitiesAsString;
+        if (expEntitiesAsString != null) { this.expEntitiesAsString = expEntitiesAsString; }
+        if (expEntities != null) { this.expEntities = expEntities; }
     }
 
     public ExpType getExpType() {

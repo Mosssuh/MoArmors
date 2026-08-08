@@ -1,6 +1,7 @@
 package mv.mossuh.moarmors.EVENTS.Levelings;
 
 import mv.mossuh.moarmors.ENUMS.ExpType;
+import mv.mossuh.mocore.VERSION.ServerVersion;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,7 +16,7 @@ public class LevelingPlacing implements Listener {
         Block block = event.getBlock();
 
         String type = String.valueOf(block.getType());
-        short data = block.getData();
+        short data = !ServerVersion.isAtLeast(ServerVersion.MC1_13) ? block.getData() : -1;
 
         ExpType expType = ExpType.BLOCK_PLACE;
         LevelingExecutor executor = new LevelingExecutor(player, expType, type, data, null);

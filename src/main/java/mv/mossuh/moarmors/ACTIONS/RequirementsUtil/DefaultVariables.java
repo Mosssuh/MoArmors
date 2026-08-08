@@ -6,6 +6,7 @@ import mv.mossuh.moarmors.CONFIGS.Armors.Armor.ConfigArmor;
 import mv.mossuh.moarmors.CONFIGS.Armors.ItemInfo.ArmorUtil.ArmorIdentifier;
 import mv.mossuh.moarmors.UTILITIES.UtilString;
 import mv.mossuh.mocore.UTILITIES.ARGS.VariableArgs.VariableArg;
+import mv.mossuh.mocore.VERSION.ServerVersion;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -68,7 +69,7 @@ public class DefaultVariables {
         if (itemStack != null && !itemStack.getType().equals(Material.AIR)) {
             durability = itemStack.getDurability();
             material = itemStack.getType().name();
-            data = itemStack.getData().getData();
+            data = !ServerVersion.isAtLeast(ServerVersion.MC1_13) ? itemStack.getData().getData() : -1;
             amount = itemStack.getAmount();
             if (itemStack.hasItemMeta()) {
                 ItemMeta meta = itemStack.getItemMeta();
@@ -134,11 +135,11 @@ public class DefaultVariables {
         if (block != null && !block.getType().equals(Material.AIR)) {
             Location location = block.getLocation();
             String type = block.getType().name();
-            String data = block.getData()+"";
+            String data = !ServerVersion.isAtLeast(ServerVersion.MC1_13) ? block.getData()+"" : "-1";
             variables.add(new VariableArg("%event_entity%", type));
             variables.add(new VariableArg("%event_data%", data));
             variables.add(new VariableArg("%block%", type));
-            variables.add(new VariableArg("%block_data%", block.getData() + ""));
+            variables.add(new VariableArg("%block_data%", data));
             variables.add(new VariableArg("%block_x%", location.getBlockX() + ""));
             variables.add(new VariableArg("%block_y%", location.getBlockY() + ""));
             variables.add(new VariableArg("%block_z%", location.getBlockZ() + ""));
