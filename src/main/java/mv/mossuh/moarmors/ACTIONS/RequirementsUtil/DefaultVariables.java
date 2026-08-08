@@ -106,13 +106,13 @@ public class DefaultVariables {
         String cost = piece.getCost()+"";
         String maxLevel = configArmor.getUpgrades().getMaxLevel()+"";
 
-        variables.add(new VariableArg("%itemstack_is_vpiece%", isPiece));
-        variables.add(new VariableArg("%itemstack_vpiece_level%", level));
-        variables.add(new VariableArg("%itemstack_vpiece_exp%", exp));
-        variables.add(new VariableArg("%itemstack_vpiece_cost%", cost));
-        variables.add(new VariableArg("%itemstack_vpiece_max_level%", maxLevel));
-        variables.add(new VariableArg("%itemstack_vpiece_tags%", tags));
-        variables.add(new VariableArg("%itemstack_vpiece_code%", code));
+        variables.add(new VariableArg("%itemstack_is_piece%", isPiece));
+        variables.add(new VariableArg("%itemstack_piece_level%", level));
+        variables.add(new VariableArg("%itemstack_piece_exp%", exp));
+        variables.add(new VariableArg("%itemstack_piece_cost%", cost));
+        variables.add(new VariableArg("%itemstack_piece_max_level%", maxLevel));
+        variables.add(new VariableArg("%itemstack_piece_tags%", tags));
+        variables.add(new VariableArg("%itemstack_piece_code%", code));
         // %itemstack_vpiece_variable_{<variable}%
         for (VariableArg variable : pieceVariables) {
             variables.add(new VariableArg("%itemstack_vpiece_variable_{" + variable.getVariable() + "}%", variable.getValue()));
