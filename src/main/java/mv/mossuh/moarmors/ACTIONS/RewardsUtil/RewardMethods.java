@@ -176,7 +176,8 @@ public class RewardMethods {
     public static void addExp(LivingEntity entity, Piece piece, double exp) {
         if (entity instanceof Player) {
             Player player = (Player) entity;
-            PieceChangeExpEvent event = new PieceChangeExpEvent(player, piece, ExecuteType.REWARDS, ReceiveType.ADD, exp);
+            UUID uuid = player.getUniqueId();
+            PieceChangeExpEvent event = new PieceChangeExpEvent(uuid, piece, ExecuteType.REWARDS, ReceiveType.ADD, exp);
             Bukkit.getPluginManager().callEvent(event);
 
             if (event.isCancelled()) { return; }
@@ -192,7 +193,8 @@ public class RewardMethods {
     public static void setExp(LivingEntity entity, Piece piece, double exp) {
         if (entity instanceof Player) {
             Player player = (Player) entity;
-            PieceChangeExpEvent event = new PieceChangeExpEvent(player, piece, ExecuteType.REWARDS, ReceiveType.SET, exp);
+            UUID uuid = player.getUniqueId();
+            PieceChangeExpEvent event = new PieceChangeExpEvent(uuid, piece, ExecuteType.REWARDS, ReceiveType.SET, exp);
             Bukkit.getPluginManager().callEvent(event);
 
             if (event.isCancelled()) { return; }
@@ -223,7 +225,8 @@ public class RewardMethods {
     public static void addLevel(LivingEntity entity, Piece piece, int level) {
         if (entity instanceof Player) {
             Player player = (Player) entity;
-            PieceChangeLevelEvent event = new PieceChangeLevelEvent(player, piece, ExecuteType.REWARDS, ReceiveType.ADD, level);
+            UUID uuid = player.getUniqueId();
+            PieceChangeLevelEvent event = new PieceChangeLevelEvent(uuid, piece, ExecuteType.REWARDS, ReceiveType.ADD, level);
             Bukkit.getPluginManager().callEvent(event);
 
             if (event.isCancelled()) { return; }
@@ -243,7 +246,8 @@ public class RewardMethods {
     public static void setLevel(LivingEntity entity, Piece piece, int level) {
         if (entity instanceof Player) {
             Player player = (Player) entity;
-            PieceChangeLevelEvent event = new PieceChangeLevelEvent(player, piece, ExecuteType.REWARDS, ReceiveType.SET, level);
+            UUID uuid = player.getUniqueId();
+            PieceChangeLevelEvent event = new PieceChangeLevelEvent(uuid, piece, ExecuteType.REWARDS, ReceiveType.SET, level);
             Bukkit.getPluginManager().callEvent(event);
 
             if (event.isCancelled()) { return; }

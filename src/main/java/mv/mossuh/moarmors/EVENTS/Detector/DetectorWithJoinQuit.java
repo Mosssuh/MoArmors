@@ -36,19 +36,19 @@ public class DetectorWithJoinQuit implements Listener {
         Piece boots = armor.getPiece(PieceType.BOOTS);
 
         if (helmet.isPiece()) {
-            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(player, helmet, EquipType.EQUIP, DetectorType.PLAYER_JOIN);
+            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(uuid, helmet, EquipType.EQUIP, DetectorType.PLAYER_JOIN);
             Bukkit.getPluginManager().callEvent(changePieceEvent);
         }
         if (chestplate.isPiece()) {
-            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(player, chestplate, EquipType.EQUIP, DetectorType.PLAYER_JOIN);
+            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(uuid, chestplate, EquipType.EQUIP, DetectorType.PLAYER_JOIN);
             Bukkit.getPluginManager().callEvent(changePieceEvent);
         }
         if (leggings.isPiece()) {
-            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(player, leggings, EquipType.EQUIP, DetectorType.PLAYER_JOIN);
+            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(uuid, leggings, EquipType.EQUIP, DetectorType.PLAYER_JOIN);
             Bukkit.getPluginManager().callEvent(changePieceEvent);
         }
         if (boots.isPiece()) {
-            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(player, boots, EquipType.EQUIP, DetectorType.PLAYER_JOIN);
+            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(uuid, boots, EquipType.EQUIP, DetectorType.PLAYER_JOIN);
             Bukkit.getPluginManager().callEvent(changePieceEvent);
         }
     }
@@ -67,19 +67,19 @@ public class DetectorWithJoinQuit implements Listener {
         Piece boots = armor.getPiece(PieceType.BOOTS);
 
         if (helmet.isPiece()) {
-            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(player, helmet, EquipType.UNEQUIP, DetectorType.PLAYER_LEAVE);
+            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(uuid, helmet, EquipType.UNEQUIP, DetectorType.PLAYER_LEAVE);
             Bukkit.getPluginManager().callEvent(changePieceEvent);
         }
         if (chestplate.isPiece()) {
-            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(player, chestplate, EquipType.UNEQUIP, DetectorType.PLAYER_LEAVE);
+            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(uuid, chestplate, EquipType.UNEQUIP, DetectorType.PLAYER_LEAVE);
             Bukkit.getPluginManager().callEvent(changePieceEvent);
         }
         if (leggings.isPiece()) {
-            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(player, leggings, EquipType.UNEQUIP, DetectorType.PLAYER_LEAVE);
+            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(uuid, leggings, EquipType.UNEQUIP, DetectorType.PLAYER_LEAVE);
             Bukkit.getPluginManager().callEvent(changePieceEvent);
         }
         if (boots.isPiece()) {
-            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(player, boots, EquipType.UNEQUIP, DetectorType.PLAYER_LEAVE);
+            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(uuid, boots, EquipType.UNEQUIP, DetectorType.PLAYER_LEAVE);
             Bukkit.getPluginManager().callEvent(changePieceEvent);
         }
 

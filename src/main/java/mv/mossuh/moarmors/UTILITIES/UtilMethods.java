@@ -127,19 +127,19 @@ public class UtilMethods {
         return PieceType.NONE;
     }
 
-    public static void executeChangePieceEvent(Player player, Piece newPiece, Piece oldPiece, DetectorType detectorType) {
+    public static void executeChangePieceEvent(UUID uuid, Piece newPiece, Piece oldPiece, DetectorType detectorType) {
         if (newPiece.isPiece() && !oldPiece.isPiece()) {
-            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(player, newPiece, EquipType.EQUIP, detectorType);
+            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(uuid, newPiece, EquipType.EQUIP, detectorType);
             Bukkit.getPluginManager().callEvent(changePieceEvent);
         } else if (!newPiece.isPiece() && oldPiece.isPiece()) {
-            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(player, oldPiece, EquipType.UNEQUIP, detectorType);
+            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(uuid, oldPiece, EquipType.UNEQUIP, detectorType);
             Bukkit.getPluginManager().callEvent(changePieceEvent);
         } else if (newPiece.isPiece() && oldPiece.isPiece()) {
             if (newPiece.getPieceUUID() != oldPiece.getPieceUUID()) {
-                PlayerChangePieceEvent changePieceEventEquip = new PlayerChangePieceEvent(player, newPiece, EquipType.EQUIP, detectorType);
+                PlayerChangePieceEvent changePieceEventEquip = new PlayerChangePieceEvent(uuid, newPiece, EquipType.EQUIP, detectorType);
                 Bukkit.getPluginManager().callEvent(changePieceEventEquip);
 
-                PlayerChangePieceEvent changePieceEventUnEquip = new PlayerChangePieceEvent(player, oldPiece, EquipType.UNEQUIP, detectorType);
+                PlayerChangePieceEvent changePieceEventUnEquip = new PlayerChangePieceEvent(uuid, oldPiece, EquipType.UNEQUIP, detectorType);
                 Bukkit.getPluginManager().callEvent(changePieceEventUnEquip);
             }
         }

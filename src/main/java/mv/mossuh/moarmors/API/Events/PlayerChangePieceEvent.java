@@ -7,22 +7,24 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
+import java.util.UUID;
+
 public class PlayerChangePieceEvent extends Event {
     private static final HandlerList handlers = new HandlerList();
-    private Player player;
+    private UUID uuid;
     private Piece piece = new Piece(null, null, null, null, null, null, null, null);
     private EquipType equipType = EquipType.NONE;
     private DetectorType detectorType = DetectorType.NONE;
 
-    public PlayerChangePieceEvent(Player player, Piece piece, EquipType equipType, DetectorType detectorType) {
-        this.player = player;
+    public PlayerChangePieceEvent(UUID uuid, Piece piece, EquipType equipType, DetectorType detectorType) {
+        this.uuid = uuid;
         if (piece != null) { this.piece = piece; }
         if (equipType != null) { this.equipType = equipType; }
         if (detectorType != null) { this.detectorType = detectorType; }
     }
 
-    public Player getPlayer() {
-        return player;
+    public UUID getUUID() {
+        return uuid;
     }
 
     public Piece getPiece() {

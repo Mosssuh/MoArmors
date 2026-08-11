@@ -31,19 +31,19 @@ public class DetectorWithRespawn implements Listener {
         Piece boots = armor.getPiece(PieceType.BOOTS);
 
         if (helmet.isPiece()) {
-            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(player, helmet, EquipType.EQUIP, DetectorType.RESPAWN);
+            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(uuid, helmet, EquipType.EQUIP, DetectorType.RESPAWN);
             Bukkit.getPluginManager().callEvent(changePieceEvent);
         }
         if (chestplate.isPiece()) {
-            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(player, chestplate, EquipType.EQUIP, DetectorType.RESPAWN);
+            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(uuid, chestplate, EquipType.EQUIP, DetectorType.RESPAWN);
             Bukkit.getPluginManager().callEvent(changePieceEvent);
         }
         if (leggings.isPiece()) {
-            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(player, leggings, EquipType.EQUIP, DetectorType.RESPAWN);
+            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(uuid, leggings, EquipType.EQUIP, DetectorType.RESPAWN);
             Bukkit.getPluginManager().callEvent(changePieceEvent);
         }
         if (boots.isPiece()) {
-            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(player, boots, EquipType.EQUIP, DetectorType.RESPAWN);
+            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(uuid, boots, EquipType.EQUIP, DetectorType.RESPAWN);
             Bukkit.getPluginManager().callEvent(changePieceEvent);
         }
 

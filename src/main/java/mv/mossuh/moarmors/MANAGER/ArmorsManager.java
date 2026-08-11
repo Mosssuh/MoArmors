@@ -9,6 +9,8 @@ import java.util.UUID;
 public class ArmorsManager {
     private static final Set<ArmorPlayer> players = new HashSet<>();
 
+    public Set<ArmorPlayer> getPlayers() { return players; }
+
     public ArmorPlayer getPlayer(UUID uuid) {
         if (uuid != null) {
             for (ArmorPlayer player : players) {

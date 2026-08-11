@@ -98,7 +98,7 @@ public class LevelingExecutor {
                     String typeString = piece.getPieceType().name();
                     double exp = entry.getValue();
 
-                    PieceChangeExpEvent expEvent = new PieceChangeExpEvent(player, piece, ExecuteType.NATURAL, ReceiveType.ADD, exp);
+                    PieceChangeExpEvent expEvent = new PieceChangeExpEvent(uuid, piece, ExecuteType.NATURAL, ReceiveType.ADD, exp);
                     Bukkit.getPluginManager().callEvent(expEvent);
 
                     if (expEvent.isCancelled()) {

@@ -48,7 +48,7 @@ public class DetectorWithEquipUnEquip implements Listener {
         Piece equipPiece = Piece.getPiece(equipItemStack);
         if (equipPiece.isPiece()) {
             armorPlayer.getArmor().setPiece(equipPiece);
-            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(player, equipPiece, EquipType.EQUIP, DetectorType.MANUAL);
+            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(uuid, equipPiece, EquipType.EQUIP, DetectorType.MANUAL);
             Bukkit.getPluginManager().callEvent(changePieceEvent);
         } else {
             armorPlayer.getArmor().removePiece(pieceType);
@@ -59,7 +59,7 @@ public class DetectorWithEquipUnEquip implements Listener {
         ItemStack unEquipItemStack = event.getOldArmorPiece();
         Piece unEquipPiece = Piece.getPiece(unEquipItemStack);
         if (unEquipPiece.isPiece()) {
-            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(player, unEquipPiece, EquipType.UNEQUIP, DetectorType.MANUAL);
+            PlayerChangePieceEvent changePieceEvent = new PlayerChangePieceEvent(uuid, unEquipPiece, EquipType.UNEQUIP, DetectorType.MANUAL);
             Bukkit.getPluginManager().callEvent(changePieceEvent);
         }
     }

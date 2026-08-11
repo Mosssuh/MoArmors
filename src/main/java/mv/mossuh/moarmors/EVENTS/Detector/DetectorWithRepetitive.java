@@ -28,10 +28,10 @@ public class DetectorWithRepetitive {
                 Armor oldArmor = armorPlayer.getArmor();
 
                 DetectorType detectorType = DetectorType.REPETITIVE;
-                UtilMethods.executeChangePieceEvent(player, newArmor.getPiece(PieceType.HELMET), oldArmor.getPiece(PieceType.HELMET), detectorType);
-                UtilMethods.executeChangePieceEvent(player, newArmor.getPiece(PieceType.CHESTPLATE), oldArmor.getPiece(PieceType.CHESTPLATE), detectorType);
-                UtilMethods.executeChangePieceEvent(player, newArmor.getPiece(PieceType.LEGGINGS), oldArmor.getPiece(PieceType.LEGGINGS), detectorType);
-                UtilMethods.executeChangePieceEvent(player, newArmor.getPiece(PieceType.BOOTS), oldArmor.getPiece(PieceType.BOOTS), detectorType);
+                UtilMethods.executeChangePieceEvent(uuid, newArmor.getPiece(PieceType.HELMET), oldArmor.getPiece(PieceType.HELMET), detectorType);
+                UtilMethods.executeChangePieceEvent(uuid, newArmor.getPiece(PieceType.CHESTPLATE), oldArmor.getPiece(PieceType.CHESTPLATE), detectorType);
+                UtilMethods.executeChangePieceEvent(uuid, newArmor.getPiece(PieceType.LEGGINGS), oldArmor.getPiece(PieceType.LEGGINGS), detectorType);
+                UtilMethods.executeChangePieceEvent(uuid, newArmor.getPiece(PieceType.BOOTS), oldArmor.getPiece(PieceType.BOOTS), detectorType);
 
                 armorPlayer.setArmor(newArmor);
             }

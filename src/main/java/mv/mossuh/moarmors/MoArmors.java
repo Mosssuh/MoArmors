@@ -67,6 +67,7 @@ public final class MoArmors extends JavaPlugin {
 
     private void registerDetectors() {
         DetectorWithRepetitive.start(this);
+        getServer().getPluginManager().registerEvents(new DetectorWithCloseServer(), this);
         getServer().getPluginManager().registerEvents(new DetectorWithEquipUnEquip(), this);
         getServer().getPluginManager().registerEvents(new DetectorWithInventory(), this);
         getServer().getPluginManager().registerEvents(new DetectorWithJoinQuit(), this);

@@ -55,7 +55,7 @@ public class LevelCommands {
                                 for (PieceType pieceType : pieces) {
                                     Piece piece = armor.getPiece(pieceType);
                                     if (piece.isPiece()) {
-                                        PieceChangeLevelEvent event = new PieceChangeLevelEvent(player, piece, ExecuteType.COMMAND, ReceiveType.ADD, amount);
+                                        PieceChangeLevelEvent event = new PieceChangeLevelEvent(uuid, piece, ExecuteType.COMMAND, ReceiveType.ADD, amount);
                                         Bukkit.getPluginManager().callEvent(event);
 
                                         if (event.isCancelled()) { return; }
@@ -86,7 +86,7 @@ public class LevelCommands {
                                 if (pieceType != PieceType.NONE) {
                                     Piece piece = armor.getPiece(pieceType);
                                     if (piece.isPiece()) {
-                                        PieceChangeLevelEvent event = new PieceChangeLevelEvent(player, piece, ExecuteType.COMMAND, ReceiveType.ADD, amount);
+                                        PieceChangeLevelEvent event = new PieceChangeLevelEvent(uuid, piece, ExecuteType.COMMAND, ReceiveType.ADD, amount);
                                         Bukkit.getPluginManager().callEvent(event);
 
                                         if (event.isCancelled()) { return; }
@@ -150,7 +150,7 @@ public class LevelCommands {
                                 for (PieceType pieceType : pieces) {
                                     Piece piece = armor.getPiece(pieceType);
                                     if (piece.isPiece()) {
-                                        PieceChangeLevelEvent event = new PieceChangeLevelEvent(player, piece, ExecuteType.COMMAND, ReceiveType.SET, amount);
+                                        PieceChangeLevelEvent event = new PieceChangeLevelEvent(uuid, piece, ExecuteType.COMMAND, ReceiveType.SET, amount);
                                         Bukkit.getPluginManager().callEvent(event);
 
                                         if (event.isCancelled()) { return; }
@@ -182,7 +182,7 @@ public class LevelCommands {
                                 if (pieceType != PieceType.NONE) {
                                     Piece piece = armor.getPiece(pieceType);
                                     if (piece.isPiece()) {
-                                        PieceChangeLevelEvent event = new PieceChangeLevelEvent(player, piece, ExecuteType.COMMAND, ReceiveType.SET, amount);
+                                        PieceChangeLevelEvent event = new PieceChangeLevelEvent(uuid, piece, ExecuteType.COMMAND, ReceiveType.SET, amount);
                                         Bukkit.getPluginManager().callEvent(event);
 
                                         if (event.isCancelled()) { return; }

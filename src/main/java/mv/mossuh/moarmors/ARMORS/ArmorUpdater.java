@@ -183,7 +183,7 @@ public class ArmorUpdater {
                 int obtainedLevel = piece.getLevel();
 
                 while (obtainedExp >= obtainedCost && obtainedLevel < maxLevel) {
-                    PieceChangeLevelEvent event = new PieceChangeLevelEvent(player, piece, ExecuteType.NATURAL, ReceiveType.ADD, 1);
+                    PieceChangeLevelEvent event = new PieceChangeLevelEvent(uuid, piece, ExecuteType.NATURAL, ReceiveType.ADD, 1);
                     Bukkit.getPluginManager().callEvent(event);
 
                     if (event.isCancelled()) { continue firstFor; }

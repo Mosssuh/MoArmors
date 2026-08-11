@@ -7,5 +7,6 @@ public enum DetectorType {
     PLAYER_LEAVE,
     REPETITIVE,
     RESPAWN,
+    CLOSE_SERVER,
     NONE
 }

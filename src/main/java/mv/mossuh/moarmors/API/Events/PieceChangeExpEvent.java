@@ -8,17 +8,19 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
+import java.util.UUID;
+
 public class PieceChangeExpEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
-    private Player player;
+    private UUID uuid;
     private Piece piece = new Piece(null, null, null, null, null, null, null, null);
     private double exp = 0;
     private ExecuteType executeType = ExecuteType.NONE;
     private ReceiveType receiveType = ReceiveType.NONE;
     private boolean isCancelled;
 
-    public PieceChangeExpEvent(Player player, Piece piece, ExecuteType executeType, ReceiveType receiveType, Double exp) {
-        this.player = player;
+    public PieceChangeExpEvent(UUID uuid, Piece piece, ExecuteType executeType, ReceiveType receiveType, Double exp) {
+        this.uuid = uuid;
         if (piece != null) { this.piece = piece; }
         if (executeType != null) { this.executeType = executeType; }
         if (receiveType != null) { this.receiveType = receiveType; }
@@ -26,8 +28,8 @@ public class PieceChangeExpEvent extends Event implements Cancellable {
         this.isCancelled = false;
     }
 
-    public Player getPlayer() {
-        return player;
+    public UUID getUUID() {
+        return uuid;
     }
 
     public Piece getPiece() {
