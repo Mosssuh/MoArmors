@@ -181,8 +181,7 @@ public class RewardMethods {
 
             if (event.isCancelled()) { return; }
 
-            double boost = event.getBoost();
-            double newExp = event.getExp() * boost;
+            double newExp = event.getExp();
 
             piece.addExp(newExp);
             ArmorUpdater.verifyPiece(player, piece, false);
@@ -198,8 +197,7 @@ public class RewardMethods {
 
             if (event.isCancelled()) { return; }
 
-            double boost = event.getBoost();
-            double newExp = event.getExp() * boost;
+            double newExp = event.getExp();
 
             piece.setExp(newExp);
             ArmorUpdater.verifyPiece(player, piece, false);

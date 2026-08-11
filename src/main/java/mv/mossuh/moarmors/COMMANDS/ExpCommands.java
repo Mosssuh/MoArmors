@@ -60,8 +60,7 @@ public class ExpCommands {
 
                                         if (event.isCancelled()) { return; }
 
-                                        double boost = event.getBoost();
-                                        double exp = event.getExp() * boost;
+                                        double exp = event.getExp();
 
                                         String name = UtilString.get(piece.getConfigArmor().getArmorInfo().getPieceInfo(pieceType).getName()).hex().apply();
                                         UtilString.get(Messages.COMMAND_PIECE_ADD_EXP_RECEIVER).hex().replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")
@@ -86,8 +85,7 @@ public class ExpCommands {
 
                                         if (event.isCancelled()) { return; }
 
-                                        double boost = event.getBoost();
-                                        double exp = event.getExp() * boost;
+                                        double exp = event.getExp();
 
                                         String name = UtilString.get(piece.getConfigArmor().getArmorInfo().getPieceInfo(pieceType).getName()).hex().apply();
                                         UtilString.get(Messages.COMMAND_PIECE_ADD_EXP_RECEIVER).hex().replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")
@@ -145,8 +143,7 @@ public class ExpCommands {
 
                                         if (event.isCancelled()) { return; }
 
-                                        double boost = event.getBoost();
-                                        double exp = event.getExp() * boost;
+                                        double exp = event.getExp();
 
                                         String name = UtilString.get(piece.getConfigArmor().getArmorInfo().getPieceInfo(pieceType).getName()).hex().apply();
                                         UtilString.get(Messages.COMMAND_PIECE_SET_EXP_RECEIVER).hex().replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")
@@ -171,8 +168,7 @@ public class ExpCommands {
 
                                         if (event.isCancelled()) { return; }
 
-                                        double boost = event.getBoost();
-                                        double exp = event.getExp() * boost;
+                                        double exp = event.getExp();
 
                                         String name = UtilString.get(piece.getConfigArmor().getArmorInfo().getPieceInfo(pieceType).getName()).hex().apply();
                                         UtilString.get(Messages.COMMAND_PIECE_SET_EXP_RECEIVER).hex().replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")

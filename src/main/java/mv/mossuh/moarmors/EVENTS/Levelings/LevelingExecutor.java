@@ -106,7 +106,7 @@ public class LevelingExecutor {
                         continue;
                     }
 
-                    double newExp = expEvent.getExp() * expEvent.getBoost();
+                    double newExp = expEvent.getExp();
 
                     UtilString.get("&b" + typeString + ": &aAdded " + newExp + " exp").hex().sendMessageInConsole(debugType);
                     piece.addExp(newExp, true);
