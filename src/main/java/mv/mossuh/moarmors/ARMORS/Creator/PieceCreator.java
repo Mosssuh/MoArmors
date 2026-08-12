@@ -119,8 +119,8 @@ public class PieceCreator {
         variables.add(new VariableArg("%progress_percentage%", progressPercentage));
 
         if (itemInfo.hasName()) {
-            String name = UtilString.get(itemInfo.getName()).hex().setRandomNumberVariable().setArgs(args).setVariables(variables).setDefaultVariables(configArmor).setPlaceholders(uuid)
-                    .setChangeOutputPlaceholder().setMathPlaceholder().setTimeFormatter().apply();
+            String name = UtilString.get(itemInfo.getName()).setArgs(args).setVariables(variables).setVariables(configArmor)
+                    .setPlaceholders(uuid).setTimeFormatter().hex().apply();
             itemMeta.setDisplayName(name);
         }
         if (itemInfo.hasLore()) {
@@ -130,13 +130,13 @@ public class PieceCreator {
                     List<String> progressMessage = configArmor.getUpgrades().getProgressMessage();
                     if (!progressMessage.isEmpty()) {
                         for (String pLine : progressMessage) {
-                            lore.add(UtilString.get(pLine).hex().setRandomNumberVariable().setArgs(args).setVariables(variables).setDefaultVariables(configArmor)
-                                    .setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder().setTimeFormatter().apply());
+                            lore.add(UtilString.get(pLine).setArgs(args).setVariables(variables).setVariables(configArmor)
+                                    .setPlaceholders(uuid).setTimeFormatter().hex().apply());
                         }
                     }
                 } else {
-                    lore.add(UtilString.get(line).hex().setRandomNumberVariable().setArgs(args).setVariables(variables).setDefaultVariables(configArmor).setPlaceholders(uuid).setChangeOutputPlaceholder()
-                            .setMathPlaceholder().setTimeFormatter().apply());
+                    lore.add(UtilString.get(line).setArgs(args).setVariables(variables).setVariables(configArmor)
+                            .setPlaceholders(uuid).setTimeFormatter().hex().apply());
                 }
             }
             itemMeta.setLore(lore);
@@ -234,8 +234,8 @@ public class PieceCreator {
         variables.add(new VariableArg("%progress_percentage%", progressPercentage));
 
         if (itemInfo.hasName()) {
-            String name = UtilString.get(itemInfo.getName()).hex().setRandomNumberVariable().setArgs(args).setVariables(variables).setDefaultVariables(configArmor)
-                    .setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder().setTimeFormatter().apply();
+            String name = UtilString.get(itemInfo.getName()).setArgs(args).setVariables(variables).setVariables(configArmor)
+                    .setPlaceholders(uuid).setTimeFormatter().hex().apply();
             itemMeta.setDisplayName(name);
         }
         if (itemInfo.hasLore()) {
@@ -245,13 +245,13 @@ public class PieceCreator {
                     List<String> progressMessage = configArmor.getUpgrades().getProgressMessage();
                     if (!progressMessage.isEmpty()) {
                         for (String pLine : progressMessage) {
-                            lore.add(UtilString.get(pLine).hex().setRandomNumberVariable().setArgs(args).setVariables(variables).setDefaultVariables(configArmor)
-                                    .setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder().setTimeFormatter().apply());
+                            lore.add(UtilString.get(pLine).setArgs(args).setVariables(variables).setVariables(configArmor)
+                                    .setPlaceholders(uuid).setTimeFormatter().hex().apply());
                         }
                     }
                 } else {
-                    lore.add(UtilString.get(line).hex().setRandomNumberVariable().setArgs(args).setVariables(variables).setDefaultVariables(configArmor).setPlaceholders(uuid)
-                            .setChangeOutputPlaceholder().setMathPlaceholder().setTimeFormatter().apply());
+                    lore.add(UtilString.get(line).setArgs(args).setVariables(variables).setVariables(configArmor)
+                            .setPlaceholders(uuid).setTimeFormatter().hex().apply());
                 }
             }
             itemMeta.setLore(lore);

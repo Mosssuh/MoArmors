@@ -1,7 +1,6 @@
 package mv.mossuh.moarmors.ACTIONS;
 
-import mv.mossuh.moarmors.ACTIONS.RequirementsUtil.DefaultVariables;
-import mv.mossuh.moarmors.ACTIONS.RequirementsUtil.Events;
+import mv.mossuh.moarmors.UTILITIES.DefaultVariables;
 import mv.mossuh.moarmors.ARMORS.Armor.Armor;
 import mv.mossuh.moarmors.CONFIGS.Armors.Armor.ConfigArmor;
 import mv.mossuh.moarmors.CONFIGS.Armors.ItemInfo.ArmorUtil.ArmorIdentifier;
@@ -158,7 +157,7 @@ public class ExecuteAction {
                         RequirementEvent requirementEvent = (RequirementEvent) moRequirement.getRequirement();
                         List<EntityRequirement> entityRequirementList = requirementEvent.getRequirements();
 
-                        if (Events.from(requirementEventType).containEntity()) {
+                        if (requirementEventType.hasEntity()) {
                             if (requirementEvent.hasRequirements()) {
                                 String entity = VariableArg.getValue(variables, "%event_entity%");
                                 String data = VariableArg.getValue(variables, "%event_data%");
@@ -176,9 +175,8 @@ public class ExecuteAction {
                     } else if (moRequirement.isRequirement(RequirementType.EVAL)) {
                         RequirementEval requirement = (RequirementEval) moRequirement.getRequirement();
                         for (String eval : requirement.getRequirements()) {
-                            boolean condition = UtilString.get(eval).hex().setVariables(variables).setVariables(actionVariables)
-                                    .setRandomNumberVariable().setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                    .setTimeFormatter().evaluateString();
+                            boolean condition = UtilString.get(eval).setVariables(variables).setVariables(actionVariables)
+                                    .setPlaceholders(uuid).setTimeFormatter().hex().evaluateString();
                             if (condition) {
                                 requirementsAccepted = requirementsAccepted + 1;
                                 break;
@@ -191,8 +189,8 @@ public class ExecuteAction {
             if (cooldown.isCooldown()) {
                 if (Cooldown.startAndIsOnCooldown(cooldownCode, cooldownInSeconds)) {
                     if (!cooldown.isByPass()) {
-                        UtilString.get(cooldown.getMessage()).hex().setVariables(variables).setVariables(actionVariables).setRandomNumberVariable().setPlaceholders(uuid)
-                                .setChangeOutputPlaceholder().setMathPlaceholder().setTimeFormatter().sendMessage(player);
+                        UtilString.get(cooldown.getMessage()).setVariables(variables).setVariables(actionVariables).setPlaceholders(uuid)
+                                .setTimeFormatter().hex().sendMessage(player);
                         return this;
                     }
                 }

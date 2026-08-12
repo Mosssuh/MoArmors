@@ -101,8 +101,8 @@ public class ArmorUpdater {
                         ItemInfo itemInfo = configArmor.getArmorInfo().getPieceInfo(pieceType);
 
                         if (itemInfo.hasName()) {
-                            String name = UtilString.get(itemInfo.getName()).hex().setRandomNumberVariable().setVariables(variables).setDefaultVariables(piece)
-                                    .setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder().setTimeFormatter().apply();
+                            String name = UtilString.get(itemInfo.getName()).setVariables(variables).setVariables(piece)
+                                    .setPlaceholders(uuid).setTimeFormatter().hex().apply();
                             itemMeta.setDisplayName(name);
                         }
 
@@ -113,13 +113,13 @@ public class ArmorUpdater {
                                     List<String> progressMessage = configArmor.getUpgrades().getProgressMessage();
                                     if (!progressMessage.isEmpty()) {
                                         for (String pLine : progressMessage) {
-                                            lore.add(UtilString.get(pLine).hex().setRandomNumberVariable().setVariables(variables).setDefaultVariables(piece)
-                                                    .setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder().setTimeFormatter().apply());
+                                            lore.add(UtilString.get(pLine).setVariables(variables).setVariables(piece)
+                                                    .setPlaceholders(uuid).setTimeFormatter().hex().apply());
                                         }
                                     }
                                 } else {
-                                    lore.add(UtilString.get(line).hex().setRandomNumberVariable().setVariables(variables).setDefaultVariables(piece).setPlaceholders(uuid)
-                                            .setChangeOutputPlaceholder().setMathPlaceholder().setTimeFormatter().apply());
+                                    lore.add(UtilString.get(line).setVariables(variables).setVariables(piece)
+                                            .setPlaceholders(uuid).setTimeFormatter().hex().apply());
                                 }
                             }
                             itemMeta.setLore(lore);
@@ -132,8 +132,8 @@ public class ArmorUpdater {
                         ItemInfo itemInfo = configArmor.getArmorInfo().getPieceInfo(pieceType);
 
                         if (itemInfo.hasName()) {
-                            String name = UtilString.get(itemInfo.getName()).hex().setRandomNumberVariable().setVariables(variables).setDefaultVariables(piece).setPlaceholders(uuid).setChangeOutputPlaceholder()
-                                    .setMathPlaceholder().setTimeFormatter().apply();
+                            String name = UtilString.get(itemInfo.getName()).setVariables(variables).setVariables(piece)
+                                    .setPlaceholders(uuid).setTimeFormatter().hex().apply();
                             itemMeta.setDisplayName(name);
                         }
 
@@ -144,13 +144,13 @@ public class ArmorUpdater {
                                     List<String> progressMaxedMessage = configArmor.getUpgrades().getMaxedProgressMessage();
                                     if (!progressMaxedMessage.isEmpty()) {
                                         for (String pLine : progressMaxedMessage) {
-                                            lore.add(UtilString.get(pLine).hex().setRandomNumberVariable().setVariables(variables).setDefaultVariables(piece)
-                                                    .setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder().setTimeFormatter().apply());
+                                            lore.add(UtilString.get(pLine).setVariables(variables).setVariables(piece)
+                                                    .setPlaceholders(uuid).setTimeFormatter().hex().apply());
                                         }
                                     }
                                 } else {
-                                    lore.add(UtilString.get(line).hex().setRandomNumberVariable().setVariables(variables).setDefaultVariables(piece)
-                                            .setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder().setTimeFormatter().apply());
+                                    lore.add(UtilString.get(line).setVariables(variables).setVariables(piece)
+                                            .setPlaceholders(uuid).setTimeFormatter().hex().apply());
                                 }
                             }
                             itemMeta.setLore(lore);
@@ -201,8 +201,8 @@ public class ArmorUpdater {
                     obtainedExp = piece.getExp();
                     obtainedCost = piece.getCost();
 
-                    UtilString.get(Messages.PIECE_LEVEL_UP).hex().replaceString("%piece_name%", name)
-                            .setRandomNumberVariable().setDefaultVariables(piece).setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder().setTimeFormatter().sendMessage(player);
+                    UtilString.get(Messages.PIECE_LEVEL_UP).replaceString("%piece_name%", name)
+                            .setVariables(piece).setPlaceholders(uuid).setTimeFormatter().hex().sendMessage(player);
                 }
             }
         }

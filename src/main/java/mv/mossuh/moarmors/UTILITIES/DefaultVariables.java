@@ -1,11 +1,12 @@
-package mv.mossuh.moarmors.ACTIONS.RequirementsUtil;
+package mv.mossuh.moarmors.UTILITIES;
 
 import mv.mossuh.moarmors.ARMORS.Armor.Armor;
 import mv.mossuh.moarmors.ARMORS.Armor.Piece;
 import mv.mossuh.moarmors.CONFIGS.Armors.Armor.ConfigArmor;
 import mv.mossuh.moarmors.CONFIGS.Armors.ItemInfo.ArmorUtil.ArmorIdentifier;
-import mv.mossuh.moarmors.UTILITIES.UtilString;
+import mv.mossuh.moarmors.CONFIGS.Armors.ItemInfo.ArmorUtil.Upgrades;
 import mv.mossuh.mocore.UTILITIES.ARGS.VariableArgs.VariableArg;
+import mv.mossuh.mocore.UTILITIES.UsefulMethods;
 import mv.mossuh.mocore.VERSION.ServerVersion;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -29,6 +30,8 @@ public class DefaultVariables {
     
     public static List<VariableArg> armor(Armor armor) {
         List<VariableArg> variables = new ArrayList<>();
+        if (armor == null) return variables;
+
         List<Piece> pieces = armor.getPieces();
         for (Piece piece : pieces) {
             if (piece.isPiece()) {
@@ -36,7 +39,6 @@ public class DefaultVariables {
                 ArmorIdentifier armorIdentifier = configArmor.getArmorIdentifier();
                 String code = armorIdentifier.getCode();
                 String tags = armorIdentifier.getTagsAsString();
-                List<VariableArg> pieceVariables = piece.getVariables();
 
                 String level = piece.getLevel()+"";
                 String exp = piece.getExp()+"";
@@ -50,10 +52,60 @@ public class DefaultVariables {
                 variables.add(new VariableArg("%" + pieceType + "_max_level%", maxLevel));
                 variables.add(new VariableArg("%" + pieceType + "_tags%", tags));
                 variables.add(new VariableArg("%" + pieceType + "_code%", code));
-                for (VariableArg variable : pieceVariables) {
+                for (VariableArg variable : piece.getVariables()) {
                     variables.add(new VariableArg("%" + pieceType + "_variable_{" + variable.getVariable() + "}%", variable.getValue()));
                 }
             }
+        }
+        return variables;
+    }
+
+    public static List<VariableArg> piece(Piece piece) {
+        List<VariableArg> variables = new ArrayList<>();
+        if (piece == null) return variables;
+
+        ConfigArmor configArmor = piece.getConfigArmor();
+        ArmorIdentifier armorIdentifier = configArmor.getArmorIdentifier();
+        String code = armorIdentifier.getCode();
+        String tags = armorIdentifier.getTagsAsString();
+        String level = piece.getLevel()+"";
+        String exp = UsefulMethods.formatNumber(piece.getExp(), 2);
+        String cost = UsefulMethods.formatNumber(piece.getCost(), 2);
+        String maxLevel = configArmor.getUpgrades().getMaxLevel()+"";
+
+        variables.add(new VariableArg("%level%", level));
+        variables.add(new VariableArg("%exp%", exp));
+        variables.add(new VariableArg("%cost%", cost));
+        variables.add(new VariableArg("%max_level%", maxLevel));
+        variables.add(new VariableArg("%tags%", tags));
+        variables.add(new VariableArg("%code%", code));
+        for (VariableArg v : piece.getVariables()) {
+            variables.add(new VariableArg("%variable_{" + v.getVariable() + "}%", v.getValue()));
+        }
+        return variables;
+    }
+
+    public static List<VariableArg> configArmor(ConfigArmor config) {
+        List<VariableArg> variables = new ArrayList<>();
+        if (config == null) return variables;
+
+        ArmorIdentifier armorIdentifier = config.getArmorIdentifier();
+        String level = "1";
+        String exp = "0";
+        Upgrades upgrades = config.getUpgrades();
+        String code = armorIdentifier.getCode();
+        String tags = armorIdentifier.getTagsAsString();
+        String maxLevel = upgrades.getMaxLevel()+"";
+        String cost = upgrades.getCostPerLevel()+"";
+
+        variables.add(new VariableArg("%level%", level));
+        variables.add(new VariableArg("%exp%", exp));
+        variables.add(new VariableArg("%cost%", cost));
+        variables.add(new VariableArg("%max_level%", maxLevel));
+        variables.add(new VariableArg("%tags%", tags));
+        variables.add(new VariableArg("%code%", code));
+        for (VariableArg v : armorIdentifier.getDefaultVariables()) {
+            variables.add(new VariableArg("%variable_{" + v.getVariable() + "}%", v.getValue()));
         }
         return variables;
     }

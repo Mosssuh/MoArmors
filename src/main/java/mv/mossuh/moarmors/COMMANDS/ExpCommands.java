@@ -63,12 +63,10 @@ public class ExpCommands {
                                         double exp = event.getExp();
 
                                         String name = UtilString.get(piece.getConfigArmor().getArmorInfo().getPieceInfo(pieceType).getName()).hex().apply();
-                                        UtilString.get(Messages.COMMAND_PIECE_ADD_EXP_RECEIVER).hex().replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")
-                                                .setRandomNumberVariable().setDefaultVariables(piece).setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                                .setDefaultVariables(player).sendMessage(player);
-                                        UtilString.get(Messages.COMMAND_PIECE_ADD_EXP_SENDER).hex().replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")
-                                                .setRandomNumberVariable().setDefaultVariables(piece).setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                                .setDefaultVariables(player).sendMessage(sender);
+                                        UtilString.get(Messages.COMMAND_PIECE_ADD_EXP_RECEIVER).replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")
+                                                .setVariables(piece).setVariables(player).setPlaceholders(uuid).hex().sendMessage(player);
+                                        UtilString.get(Messages.COMMAND_PIECE_ADD_EXP_SENDER).replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")
+                                                .setVariables(piece).setVariables(player).setPlaceholders(uuid).hex().sendMessage(sender);
 
                                         piece.addExp(exp);
                                         ArmorUpdater.verifyPiece(player, piece, true);
@@ -88,12 +86,10 @@ public class ExpCommands {
                                         double exp = event.getExp();
 
                                         String name = UtilString.get(piece.getConfigArmor().getArmorInfo().getPieceInfo(pieceType).getName()).hex().apply();
-                                        UtilString.get(Messages.COMMAND_PIECE_ADD_EXP_RECEIVER).hex().replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")
-                                                .setRandomNumberVariable().setDefaultVariables(piece).setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                                .setDefaultVariables(player).sendMessage(player);
-                                        UtilString.get(Messages.COMMAND_PIECE_ADD_EXP_SENDER).hex().replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")
-                                                .setRandomNumberVariable().setDefaultVariables(piece).setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                                .setDefaultVariables(player).sendMessage(sender);
+                                        UtilString.get(Messages.COMMAND_PIECE_ADD_EXP_RECEIVER).replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")
+                                                .setVariables(piece).setVariables(player).setPlaceholders(uuid).hex().sendMessage(player);
+                                        UtilString.get(Messages.COMMAND_PIECE_ADD_EXP_SENDER).replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")
+                                                .setVariables(piece).setVariables(player).setPlaceholders(uuid).hex().sendMessage(sender);
 
                                         piece.addExp(exp);
                                         ArmorUpdater.verifyPiece(player, piece, true);
@@ -146,12 +142,10 @@ public class ExpCommands {
                                         double exp = event.getExp();
 
                                         String name = UtilString.get(piece.getConfigArmor().getArmorInfo().getPieceInfo(pieceType).getName()).hex().apply();
-                                        UtilString.get(Messages.COMMAND_PIECE_SET_EXP_RECEIVER).hex().replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")
-                                                .setRandomNumberVariable().setDefaultVariables(piece).setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                                .setDefaultVariables(player).sendMessage(player);
-                                        UtilString.get(Messages.COMMAND_PIECE_SET_EXP_SENDER).hex().replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")
-                                                .setRandomNumberVariable().setDefaultVariables(piece).setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                                .setDefaultVariables(player).sendMessage(sender);
+                                        UtilString.get(Messages.COMMAND_PIECE_SET_EXP_RECEIVER).replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")
+                                                .setVariables(piece).setVariables(player).setPlaceholders(uuid).hex().sendMessage(player);
+                                        UtilString.get(Messages.COMMAND_PIECE_SET_EXP_SENDER).replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")
+                                                .setVariables(piece).setVariables(player).setPlaceholders(uuid).hex().sendMessage(sender);
 
                                         piece.setExp(exp);
                                         ArmorUpdater.verifyPiece(player, piece, true);
@@ -171,12 +165,10 @@ public class ExpCommands {
                                         double exp = event.getExp();
 
                                         String name = UtilString.get(piece.getConfigArmor().getArmorInfo().getPieceInfo(pieceType).getName()).hex().apply();
-                                        UtilString.get(Messages.COMMAND_PIECE_SET_EXP_RECEIVER).hex().replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")
-                                                .setRandomNumberVariable().setDefaultVariables(piece).setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                                .setDefaultVariables(player).sendMessage(player);
-                                        UtilString.get(Messages.COMMAND_PIECE_SET_EXP_SENDER).hex().replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")
-                                                .setRandomNumberVariable().setDefaultVariables(piece).setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                                .setDefaultVariables(player).sendMessage(sender);
+                                        UtilString.get(Messages.COMMAND_PIECE_SET_EXP_RECEIVER).replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")
+                                                .setVariables(piece).setVariables(player).setPlaceholders(uuid).hex().sendMessage(player);
+                                        UtilString.get(Messages.COMMAND_PIECE_SET_EXP_SENDER).replaceString("%piece_name%", name).replaceString("%new_exp%", exp + "")
+                                                .setVariables(piece).setVariables(player).setPlaceholders(uuid).hex().sendMessage(sender);
 
                                         piece.setExp(exp);
                                         ArmorUpdater.verifyPiece(player, piece, true);

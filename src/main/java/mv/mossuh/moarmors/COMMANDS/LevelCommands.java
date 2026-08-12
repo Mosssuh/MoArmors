@@ -68,12 +68,10 @@ public class LevelCommands {
                                         if (level < 0) { level = 0; }
 
                                         String name = UtilString.get(piece.getConfigArmor().getArmorInfo().getPieceInfo(pieceType).getName()).hex().apply();
-                                        UtilString.get(Messages.COMMAND_PIECE_ADD_LEVEL_RECEIVER).hex().replaceString("%piece_name%", name).replaceString("%new_level%", level+"")
-                                                .setRandomNumberVariable().setDefaultVariables(piece).setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                                .setDefaultVariables(player).sendMessage(player);
-                                        UtilString.get(Messages.COMMAND_PIECE_ADD_LEVEL_SENDER).hex().replaceString("%piece_name%", name).replaceString("%new_level%", level+"")
-                                                .setRandomNumberVariable().setDefaultVariables(piece).setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                                .setDefaultVariables(player).sendMessage(sender);
+                                        UtilString.get(Messages.COMMAND_PIECE_ADD_LEVEL_RECEIVER).replaceString("%piece_name%", name).replaceString("%new_level%", level+"")
+                                                .setVariables(piece).setVariables(player).setPlaceholders(uuid).hex().sendMessage(player);
+                                        UtilString.get(Messages.COMMAND_PIECE_ADD_LEVEL_SENDER).replaceString("%piece_name%", name).replaceString("%new_level%", level+"")
+                                                .setVariables(piece).setVariables(player).setPlaceholders(uuid).hex().sendMessage(sender);
 
                                         piece.addLevel(level);
                                         piece.setCost(cost*level);
@@ -99,12 +97,10 @@ public class LevelCommands {
                                         if (level < 0) { level = 0; }
 
                                         String name = UtilString.get(piece.getConfigArmor().getArmorInfo().getPieceInfo(pieceType).getName()).hex().apply();
-                                        UtilString.get(Messages.COMMAND_PIECE_ADD_LEVEL_RECEIVER).hex().replaceString("%piece_name%", name).replaceString("%new_level%", level+"")
-                                                .setRandomNumberVariable().setDefaultVariables(piece).setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                                .setDefaultVariables(player).sendMessage(player);
-                                        UtilString.get(Messages.COMMAND_PIECE_ADD_LEVEL_SENDER).hex().replaceString("%piece_name%", name).replaceString("%new_level%", level+"")
-                                                .setRandomNumberVariable().setDefaultVariables(piece).setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                                .setDefaultVariables(player).sendMessage(sender);
+                                        UtilString.get(Messages.COMMAND_PIECE_ADD_LEVEL_RECEIVER).replaceString("%piece_name%", name).replaceString("%new_level%", level+"")
+                                                .setVariables(piece).setVariables(player).setPlaceholders(uuid).hex().sendMessage(player);
+                                        UtilString.get(Messages.COMMAND_PIECE_ADD_LEVEL_SENDER).replaceString("%piece_name%", name).replaceString("%new_level%", level+"")
+                                                .setVariables(piece).setVariables(player).setPlaceholders(uuid).hex().sendMessage(sender);
 
                                         piece.addLevel(level);
                                         piece.setCost(cost*level);
@@ -164,12 +160,10 @@ public class LevelCommands {
 
 
                                         String name = UtilString.get(piece.getConfigArmor().getArmorInfo().getPieceInfo(pieceType).getName()).hex().apply();
-                                        UtilString.get(Messages.COMMAND_PIECE_SET_LEVEL_RECEIVER).hex().replaceString("%piece_name%", name).replaceString("%new_level%", level+"")
-                                                .setRandomNumberVariable().setDefaultVariables(piece).setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                                .setDefaultVariables(player).sendMessage(player);
-                                        UtilString.get(Messages.COMMAND_PIECE_SET_LEVEL_SENDER).hex().replaceString("%piece_name%", name).replaceString("%new_level%", level+"")
-                                                .setRandomNumberVariable().setDefaultVariables(piece).setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                                .setDefaultVariables(player).sendMessage(sender);
+                                        UtilString.get(Messages.COMMAND_PIECE_SET_LEVEL_RECEIVER).replaceString("%piece_name%", name).replaceString("%new_level%", level+"")
+                                                .setVariables(piece).setVariables(player).setPlaceholders(uuid).hex().sendMessage(player);
+                                        UtilString.get(Messages.COMMAND_PIECE_SET_LEVEL_SENDER).replaceString("%piece_name%", name).replaceString("%new_level%", level+"")
+                                                .setVariables(piece).setVariables(player).setPlaceholders(uuid).hex().sendMessage(sender);
 
                                         piece.setLevel(level);
                                         piece.setCost(cost*level);
@@ -196,12 +190,10 @@ public class LevelCommands {
 
 
                                         String name = UtilString.get(piece.getConfigArmor().getArmorInfo().getPieceInfo(pieceType).getName()).hex().apply();
-                                        UtilString.get(Messages.COMMAND_PIECE_SET_LEVEL_RECEIVER).hex().replaceString("%piece_name%", name).replaceString("%new_level%", level+"")
-                                                .setRandomNumberVariable().setDefaultVariables(piece).setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                                .setDefaultVariables(player).sendMessage(player);
-                                        UtilString.get(Messages.COMMAND_PIECE_SET_LEVEL_SENDER).hex().replaceString("%piece_name%", name).replaceString("%new_level%", level+"")
-                                                .setRandomNumberVariable().setDefaultVariables(piece).setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                                .setDefaultVariables(player).sendMessage(sender);
+                                        UtilString.get(Messages.COMMAND_PIECE_SET_LEVEL_RECEIVER).replaceString("%piece_name%", name).replaceString("%new_level%", level+"")
+                                                .setVariables(piece).setVariables(player).setPlaceholders(uuid).hex().sendMessage(player);
+                                        UtilString.get(Messages.COMMAND_PIECE_SET_LEVEL_SENDER).replaceString("%piece_name%", name).replaceString("%new_level%", level+"")
+                                                .setVariables(piece).setVariables(player).setPlaceholders(uuid).hex().sendMessage(sender);
 
                                         piece.setLevel(level);
                                         piece.setCost(cost*level);

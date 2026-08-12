@@ -1,12 +1,10 @@
 package mv.mossuh.moarmors.ACTIONS;
 
-import mv.mossuh.moarmors.ACTIONS.RequirementsUtil.DefaultVariables;
-import mv.mossuh.moarmors.ACTIONS.RequirementsUtil.Events;
+import mv.mossuh.moarmors.UTILITIES.DefaultVariables;
 import mv.mossuh.moarmors.ARMORS.Armor.Armor;
 import mv.mossuh.moarmors.CONFIGS.Armors.Armor.ConfigArmor;
 import mv.mossuh.moarmors.CONFIGS.Config.Config;
 import mv.mossuh.moarmors.ENUMS.DebugType;
-import mv.mossuh.moarmors.ENUMS.PieceType;
 import mv.mossuh.moarmors.UTILITIES.UtilString;
 import mv.mossuh.moarmors.UTILITIES.vArgs;
 import mv.mossuh.mocore.ACTIONS.ActionUtil.MoAction;
@@ -137,12 +135,9 @@ public class Requirements {
                     String actionName = vAction.getActionName();
                     MoCooldown cooldown = vAction.getCooldown();
                     EventType requirementEventType = vAction.getEventType();
-                    if (requirementEventType.equals(eventType) || requirementEventType.equals(EventType.NONE)) {
+                    if (requirementEventType == eventType) {
                         MoRequirements requirements = vAction.getRequirements();
                         List<MoRequirement> requirementList = requirements.getRequirements();
-
-                        int requirementsAmount = requirementList.size();
-                        int requirementsAccepted = 0;
 
                         List<VariableArg> actionVariables = new ArrayList<>();
                         String cooldownCode = Config.PLUGIN_NAME+"::"+uuid+"::"+code+"::"+actionName;
@@ -155,75 +150,74 @@ public class Requirements {
                         UtilString.get("&bType: Normal").hex().sendMessageInConsole(debugType);
                         UtilString.get("&bAction name: " + actionName).hex().sendMessageInConsole(debugType);
 
-                        if (!requirementList.isEmpty()) {
-                            for (MoRequirement moRequirement : requirementList) {
-                                if (moRequirement.isRequirement(RequirementType.EVENT)) {
-                                    RequirementEvent requirementEvent = (RequirementEvent) moRequirement.getRequirement();
-                                    List<EntityRequirement> entityRequirementList = requirementEvent.getRequirements();
-
-                                    if (Events.from(requirementEventType).containEntity()) {
-                                        if (requirementEvent.hasRequirements()) {
-                                            String entity = VariableArg.getValue(variables, "%event_entity%");
-                                            String data = VariableArg.getValue(variables, "%event_data%");
-                                            if (EntityRequirement.containsEntity(entityRequirementList, entity, data)) {
-                                                requirementsAccepted = requirementsAccepted + 1;
-                                                UtilString.get("&bEvent: &7" + eventType.name() + " -> " + entity + ":" + data + " &8 | &a" + true).hex().sendMessageInConsole(debugType);
-                                            } else {
-                                                UtilString.get("&bEvent: &7" + eventType.name() + " -> " + entity + ":" + data + " &8 | &c" + false).hex().sendMessageInConsole(debugType);
-                                            }
-                                        } else {
-                                            requirementsAccepted = requirementsAccepted + 1;
-                                            UtilString.get("&bEvent: &7No requirements | &a" + true).hex().sendMessageInConsole(debugType);
-                                        }
-                                    } else {
-                                        requirementsAccepted = requirementsAccepted + 1;
-                                        UtilString.get("&bEvent: &7No requirements | &a" + true).hex().sendMessageInConsole(debugType);
-                                    }
-                                } else if (moRequirement.isRequirement(RequirementType.EVAL)) {
-                                    RequirementEval requirement = (RequirementEval) moRequirement.getRequirement();
-                                    for (String eval : requirement.getRequirements()) {
-                                        boolean condition = UtilString.get(eval).hex().setVariables(variables).setVariables(actionVariables)
-                                                .setRandomNumberVariable().setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                                .setTimeFormatter().evaluateString();
-
-                                        String value = UtilString.get(eval).hex().setVariables(variables).setVariables(actionVariables)
-                                                .setRandomNumberVariable().setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                                .setTimeFormatter().apply();
-
-                                        if (condition) {
-                                            UtilString.get(value + " &8| &a" + true).hex().sendMessageInConsole(debugType);
-                                            requirementsAccepted = requirementsAccepted + 1;
-                                            break;
-                                        } else {
-                                            UtilString.get(value + " &8| &c" + false).hex().sendMessageInConsole(debugType);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
                         if (cooldown.isCooldown()) {
                             if (Cooldown.startAndIsOnCooldown(cooldownCode, cooldownInSeconds)) {
                                 if (!cooldown.isByPass()) {
                                     UtilString.get("&bStatus: &cIn Cooldown").hex().sendMessageInConsole(debugType);
-                                    UtilString.get(cooldown.getMessage()).hex().setVariables(variables).setVariables(actionVariables).setRandomNumberVariable().setPlaceholders(uuid)
-                                            .setChangeOutputPlaceholder().setMathPlaceholder().setTimeFormatter().sendMessage(player);
+                                    UtilString.get(cooldown.getMessage()).setVariables(variables).setVariables(actionVariables)
+                                            .setPlaceholders(uuid).setTimeFormatter().hex().sendMessage(player);
                                     continue;
                                 }
                             }
                         }
 
-                        if (requirementsAccepted == requirementsAmount) {
-                            MoRewards moRewards = new MoRewards(vAction.getRewards().getRewards(), null);
-                            moRewards.addVariables(actionVariables);
-                            approvedRewards.add(moRewards);
-                            UtilString.get("&bStatus: &aApproved").hex().sendMessageInConsole(debugType);
-                        } else {
-                            UtilString.get("&bStatus: &cDisapproved").hex().sendMessageInConsole(debugType);
-                            MoRewards moRewards = new MoRewards(vAction.getElseRewards().getRewards(), null);
-                            moRewards.addVariables(actionVariables);
-                            approvedRewards.add(moRewards);
+                        boolean isAccepted = true;
+                        if (!requirementList.isEmpty()) {
+                            for (MoRequirement moRequirement : requirementList) {
+                                boolean requirementAccepted = false;
+
+                                if (moRequirement.isRequirement(RequirementType.EVENT)) {
+                                    RequirementEvent requirementEvent = (RequirementEvent) moRequirement.getRequirement();
+                                    List<EntityRequirement> entityRequirementList = requirementEvent.getRequirements();
+
+                                    if (requirementEventType.hasEntity()) {
+                                        if (requirementEvent.hasRequirements()) {
+                                            String entity = VariableArg.getValue(variables, "%event_entity%");
+                                            String data = VariableArg.getValue(variables, "%event_data%");
+
+                                            boolean containsEntity = EntityRequirement.containsEntity(entityRequirementList, entity, data);
+                                            requirementAccepted = containsEntity;
+                                            UtilString.get("&bEvent: &7" + eventType.name() + " -> " + entity + ":" + data + " &8 | &a" + containsEntity).hex().sendMessageInConsole(debugType);
+                                        } else {
+                                            requirementAccepted = true;
+                                            UtilString.get("&bEvent: &7No requirements | &a" + true).hex().sendMessageInConsole(debugType);
+                                        }
+                                    } else {
+                                        boolean isEvent = requirementEventType == eventType;
+                                        requirementAccepted = isEvent;
+                                        UtilString.get("&bEvent: &7No requirements | &a" + isEvent).hex().sendMessageInConsole(debugType);
+                                    }
+                                } else if (moRequirement.isRequirement(RequirementType.EVAL)) {
+                                    RequirementEval requirement = (RequirementEval) moRequirement.getRequirement();
+                                    for (String eval : requirement.getRequirements()) {
+                                        boolean condition = UtilString.get(eval).setVariables(variables).setVariables(actionVariables)
+                                                .setPlaceholders(uuid).setTimeFormatter().hex().evaluateString();
+
+                                        if (condition) {
+                                            requirementAccepted = true;
+                                            break;
+                                        }
+                                    }
+                                    UtilString.get("&bEval: " + (requirementAccepted ? "&atrue" : "&cfalse")).hex().sendMessageInConsole(debugType);
+                                }
+
+                                if (!requirementAccepted) {
+                                    isAccepted = false;
+                                    break;
+                                }
+                            }
                         }
+
+
+                        MoRewards moRewards;
+                        if (isAccepted) {
+                            moRewards = new MoRewards(vAction.getRewards().getRewards(), null);
+                        } else {
+                            moRewards = new MoRewards(vAction.getElseRewards().getRewards(), null);
+                        }
+                        moRewards.addVariables(actionVariables);
+                        approvedRewards.add(moRewards);
+                        UtilString.get("&bStatus: " + (isAccepted ? "&aApproved" : "&cDisapproved")).hex().sendMessageInConsole(debugType);
                     }
                 }
             }

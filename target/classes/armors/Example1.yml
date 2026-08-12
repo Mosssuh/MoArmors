@@ -1,6 +1,5 @@
 Armors:
   TokensArmor:
-    code: TokensArmor
     tags: Tokens, Armor
     variables:
       - 'keys_generator -> 0'

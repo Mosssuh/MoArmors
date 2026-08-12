@@ -146,8 +146,8 @@ public class Rewards {
                                         location = rewardArgs.getLocation();
                                     } else if (rewardReceiverType.equals(RewardReceiverType.PLACEHOLDER)) {
                                         if (rewardReceiver.hasRewardReceiver()) {
-                                            String rewardReceiverString = UtilString.get(rewardReceiver.getRewardReceiver()).setRandomNumberVariable().setVariables(variables)
-                                                    .setVariables(actionVariables).setPlaceholders(player).setChangeOutputPlaceholder().setMathPlaceholder().setTimeFormatter().apply();
+                                            String rewardReceiverString = UtilString.get(rewardReceiver.getRewardReceiver()).setVariables(variables)
+                                                    .setVariables(actionVariables).setPlaceholders(player).setTimeFormatter().apply();
                                             Player rewardPlayer = Bukkit.getPlayer(rewardReceiverString);
                                             if (rewardPlayer != null && rewardPlayer.isOnline()) {
                                                 entityReceiver = rewardPlayer;
@@ -158,9 +158,8 @@ public class Rewards {
                                         entityReceiver = player;
                                         location = player.getLocation();
                                     }
-                                    reward = UtilString.get(randomSelectedReward.getReward()).hex().setRandomNumberVariable()
-                                            .setVariables(variables).setVariables(actionVariables).setPlaceholders(player).setChangeOutputPlaceholder().setMathPlaceholder()
-                                            .setTimeFormatter().apply();
+                                    reward = UtilString.get(randomSelectedReward.getReward()).setVariables(variables).setVariables(actionVariables)
+                                            .setPlaceholders(player).setTimeFormatter().hex().apply();
 
                                     EntityType entityReceiverType = EntityType.UNKNOWN;
                                     if (entityReceiver != null) {
@@ -223,11 +222,11 @@ public class Rewards {
                                         }
                                     }
 
-                                    if (executeArmorRewards) {
+                                    if (executeArmorRewards || executeVariableRewards) {
                                         Piece pieceReceiver = new Piece(null, null, null, null, null, null, null, null);
                                         if (rewardReceiverType.equals(RewardReceiverType.PLACEHOLDER)) {
-                                            PieceType pieceType = UtilMethods.getPieceType(UtilString.get(rewardReceiver.getRewardReceiver()).setRandomNumberVariable().setVariables(variables)
-                                                    .setVariables(actionVariables).setPlaceholders(player).setChangeOutputPlaceholder().setMathPlaceholder().setTimeFormatter().apply());
+                                            PieceType pieceType = UtilMethods.getPieceType(UtilString.get(rewardReceiver.getRewardReceiver()).setVariables(variables)
+                                                    .setVariables(actionVariables).setPlaceholders(player).setTimeFormatter().apply());
                                             switch (pieceType) {
                                                 case HELMET:
                                                     pieceReceiver = armor.getPiece(PieceType.HELMET);
@@ -245,73 +244,55 @@ public class Rewards {
                                         }
 
                                         if (pieceReceiver.isPiece()) {
-                                            if (rewardType.equals(RewardType.ADD_EXP)) {
-                                                if (UtilString.get(reward).isNumeric()) {
-                                                    double exp = Double.parseDouble(reward);
-                                                    RewardMethods.addExp(player, pieceReceiver, exp);
-                                                }
-                                            } else if (rewardType.equals(RewardType.SET_EXP)) {
-                                                if (UtilString.get(reward).isNumeric()) {
-                                                    double exp = Double.parseDouble(reward);
-                                                    RewardMethods.setExp(player, pieceReceiver, exp);
-                                                }
-                                            } else if (rewardType.equals(RewardType.ADD_LEVEL)) {
-                                                if (UtilString.get(reward).isNumeric()) {
-                                                    int levelReward = Integer.parseInt(reward);
-                                                    RewardMethods.addLevel(player, pieceReceiver, levelReward);
-                                                }
-                                            } else if (rewardType.equals(RewardType.SET_LEVEL)) {
-                                                if (UtilString.get(reward).isNumeric()) {
-                                                    int levelReward = Integer.parseInt(reward);
-                                                    RewardMethods.setLevel(player, pieceReceiver, levelReward);
-                                                }
-                                            } else if (rewardType.equals(RewardType.REMOVE_EXP)) {
-                                                if (UtilString.get(reward).isNumeric()) {
-                                                    double exp = Double.parseDouble(reward);
-                                                    RewardMethods.removeExp(player, pieceReceiver, exp);
-                                                }
-                                            } else if (rewardType.equals(RewardType.REMOVE_LEVEL)) {
-                                                if (UtilString.get(reward).isNumeric()) {
-                                                    int levelReward = Integer.parseInt(reward);
-                                                    RewardMethods.removeLevel(player, pieceReceiver, levelReward);
+                                            if (executeArmorRewards) {
+                                                if (rewardType.equals(RewardType.ADD_EXP)) {
+                                                    if (UtilString.get(reward).isNumeric()) {
+                                                        double exp = Double.parseDouble(reward);
+                                                        RewardMethods.addExp(player, pieceReceiver, exp);
+                                                    }
+                                                } else if (rewardType.equals(RewardType.SET_EXP)) {
+                                                    if (UtilString.get(reward).isNumeric()) {
+                                                        double exp = Double.parseDouble(reward);
+                                                        RewardMethods.setExp(player, pieceReceiver, exp);
+                                                    }
+                                                } else if (rewardType.equals(RewardType.ADD_LEVEL)) {
+                                                    if (UtilString.get(reward).isNumeric()) {
+                                                        int levelReward = Integer.parseInt(reward);
+                                                        RewardMethods.addLevel(player, pieceReceiver, levelReward);
+                                                    }
+                                                } else if (rewardType.equals(RewardType.SET_LEVEL)) {
+                                                    if (UtilString.get(reward).isNumeric()) {
+                                                        int levelReward = Integer.parseInt(reward);
+                                                        RewardMethods.setLevel(player, pieceReceiver, levelReward);
+                                                    }
+                                                } else if (rewardType.equals(RewardType.REMOVE_EXP)) {
+                                                    if (UtilString.get(reward).isNumeric()) {
+                                                        double exp = Double.parseDouble(reward);
+                                                        RewardMethods.removeExp(player, pieceReceiver, exp);
+                                                    }
+                                                } else if (rewardType.equals(RewardType.REMOVE_LEVEL)) {
+                                                    if (UtilString.get(reward).isNumeric()) {
+                                                        int levelReward = Integer.parseInt(reward);
+                                                        RewardMethods.removeLevel(player, pieceReceiver, levelReward);
+                                                    }
                                                 }
                                             }
-                                        }
-                                    }
 
-                                    if (executeVariableRewards) {
-                                        Piece pieceReceiver = new Piece(null, null, null, null, null, null, null, null);
-                                        if (rewardReceiverType.equals(RewardReceiverType.PLACEHOLDER)) {
-                                            PieceType pieceType = UtilMethods.getPieceType(UtilString.get(rewardReceiver.getRewardReceiver()).setRandomNumberVariable().setVariables(variables)
-                                                    .setVariables(actionVariables).setPlaceholders(player).setChangeOutputPlaceholder().setMathPlaceholder().setTimeFormatter().apply());
-                                            switch (pieceType) {
-                                                case HELMET:
-                                                    pieceReceiver = armor.getPiece(PieceType.HELMET);
-                                                    break;
-                                                case CHESTPLATE:
-                                                    pieceReceiver = armor.getPiece(PieceType.CHESTPLATE);
-                                                    break;
-                                                case LEGGINGS:
-                                                    pieceReceiver = armor.getPiece(PieceType.LEGGINGS);
-                                                    break;
-                                                case BOOTS:
-                                                    pieceReceiver = armor.getPiece(PieceType.BOOTS);
-                                                    break;
-                                            }
-                                        }
-
-                                        if (pieceReceiver.isPiece()) {
-                                            if (rewardType.equals(RewardType.SET_VARIABLE)) {
-                                                VariableSeparator vs = new VariableSeparator(reward, true);
-                                                VariableArg variable = vs.getVariable();
-                                                if (variable.isVariable() && variable.isValue()) {
-                                                    RewardMethods.setVariable(player, pieceReceiver, variable);
-                                                }
-                                            } else if (rewardType.equals(RewardType.REMOVE_VARIABLE)) {
-                                                VariableSeparator vs = new VariableSeparator(reward, false);
-                                                VariableArg variable = vs.getVariable();
-                                                if (variable.isVariable()) {
-                                                    RewardMethods.removeVariable(player, pieceReceiver, variable.getVariable());
+                                            if (executeVariableRewards) {
+                                                if (pieceReceiver.isPiece()) {
+                                                    if (rewardType.equals(RewardType.SET_VARIABLE)) {
+                                                        VariableSeparator vs = new VariableSeparator(reward, true);
+                                                        VariableArg variable = vs.getVariable();
+                                                        if (variable.isVariable() && variable.isValue()) {
+                                                            RewardMethods.setVariable(player, pieceReceiver, variable);
+                                                        }
+                                                    } else if (rewardType.equals(RewardType.REMOVE_VARIABLE)) {
+                                                        VariableSeparator vs = new VariableSeparator(reward, false);
+                                                        VariableArg variable = vs.getVariable();
+                                                        if (variable.isVariable()) {
+                                                            RewardMethods.removeVariable(player, pieceReceiver, variable.getVariable());
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }

@@ -1,6 +1,6 @@
 package mv.mossuh.moarmors.ACTIONS.Booster;
 
-import mv.mossuh.moarmors.ACTIONS.RequirementsUtil.DefaultVariables;
+import mv.mossuh.moarmors.UTILITIES.DefaultVariables;
 import mv.mossuh.moarmors.ARMORS.Armor.Armor;
 import mv.mossuh.moarmors.UTILITIES.UtilString;
 import mv.mossuh.mocore.ACTIONS.RequirementUtil.MoRequirement;
@@ -62,9 +62,8 @@ public class EvalRequirements {
                 if (vRequirement.isRequirement(RequirementType.EVAL)) {
                     RequirementEval requirement = (RequirementEval) vRequirement.getRequirement();
                     for (String eval : requirement.getRequirements()) {
-                        boolean condition = UtilString.get(eval).hex().setVariables(variables)
-                                .setRandomNumberVariable().setPlaceholders(uuid).setChangeOutputPlaceholder().setMathPlaceholder()
-                                .setTimeFormatter().evaluateString();
+                        boolean condition = UtilString.get(eval).setVariables(variables)
+                                .setPlaceholders(uuid).setTimeFormatter().hex().evaluateString();
 
                         if (condition) {
                             requirementsAccepted = requirementsAccepted + 1;
