@@ -110,10 +110,6 @@ public class ConfigsManager {
             if (config.contains("Armors") && !config.getConfigurationSection("Armors").getKeys(false).isEmpty()) {
                 for (String code : config.getConfigurationSection("Armors").getKeys(false)) {
                     codes.add(code);
-                    if (!config.contains("Armors." + code + ".code")) {
-                        UtilString.get("&8[" + Config.PREFIX + "&8] &cThe armor couldn't be loaded in " + code + ", due to possible lack of code.").hex().sendMessageInConsole();
-                        continue;
-                    }
 
                     String stringTags = config.getString("Armors." + code + ".tags");
                     List<String> tags = UtilMethods.separateString(stringTags);
