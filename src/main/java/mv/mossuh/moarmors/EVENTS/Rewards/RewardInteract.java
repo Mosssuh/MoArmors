@@ -1,6 +1,6 @@
 package mv.mossuh.moarmors.EVENTS.Rewards;
 
-import mv.mossuh.moarmors.UTILITIES.vArgs;
+import mv.mossuh.moarmors.UTILITIES.MoArgs;
 import mv.mossuh.mocore.ENUMS.EventType;
 import mv.mossuh.mocore.UTILITIES.ARGS.RewardArgs.RewardArgs;
 import mv.mossuh.mocore.UTILITIES.ARGS.RewardArgs.RewardArgsType;
@@ -38,14 +38,15 @@ public class RewardInteract implements Listener {
 
             EventType eventType = EventType.BLOCK_INTERACT;
 
-            vArgs args = new vArgs();
+            MoArgs args = new MoArgs();
             RewardArgs rewardArgs = new RewardArgs(RewardArgsType.BLOCK, block);
             args.setRewardArgs(rewardArgs);
+            args.addVariableArg(
+                    new VariableArg("%click_type%", clickType)
+            );
 
-            List<VariableArg> variables = new ArrayList<>();
-            variables.add(new VariableArg("%click_type%", clickType));
             int times = 1;
-            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, variables, times);
+            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
             executor.execute();
             if (executor.isCancelledEvent()) { event.setCancelled(true); }
         }
@@ -67,14 +68,14 @@ public class RewardInteract implements Listener {
                 clickType = "LEFT";
             }
 
-            vArgs args = new vArgs();
+            MoArgs args = new MoArgs();
             RewardArgs rewardArgs = new RewardArgs(RewardArgsType.ITEMSTACK, itemStack);
             args.setRewardArgs(rewardArgs);
-
-            List<VariableArg> variables = new ArrayList<>();
-            variables.add(new VariableArg("%click_type%", clickType));
+            args.addVariableArg(
+                    new VariableArg("%click_type%", clickType)
+            );
             int times = 1;
-            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, variables, times);
+            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
             executor.execute();
             if (executor.isCancelledEvent()) { event.setCancelled(true); }
         }
@@ -95,13 +96,13 @@ public class RewardInteract implements Listener {
             return;
         }
 
-        vArgs args = new vArgs();
+        MoArgs args = new MoArgs();
         RewardArgs rewardArgs = new RewardArgs(RewardArgsType.ENTITY, entity);
         args.setRewardArgs(rewardArgs);
         EventType eventType = EventType.ENTITY_INTERACT;
 
         int times = 1;
-        RewardExecutor executor = new RewardExecutor(player, event, eventType, args, null, times);
+        RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
         executor.execute();
         if (executor.isCancelledEvent()) { event.setCancelled(true); }
     }

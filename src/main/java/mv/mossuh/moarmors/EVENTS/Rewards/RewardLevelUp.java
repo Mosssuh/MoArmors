@@ -1,6 +1,6 @@
 package mv.mossuh.moarmors.EVENTS.Rewards;
 
-import mv.mossuh.moarmors.UTILITIES.vArgs;
+import mv.mossuh.moarmors.UTILITIES.MoArgs;
 import mv.mossuh.mocore.ENUMS.EventType;
 import mv.mossuh.mocore.UTILITIES.ARGS.RewardArgs.RewardArgs;
 import mv.mossuh.mocore.UTILITIES.ARGS.RewardArgs.RewardArgsType;
@@ -20,17 +20,16 @@ public class RewardLevelUp implements Listener {
         Player player = event.getPlayer();
         int newLevel = event.getNewLevel();
         int oldLevel = event.getOldLevel();
-
-        vArgs args = new vArgs();
-        RewardArgs rewardArgs = new RewardArgs(RewardArgsType.NONE);
-        args.setRewardArgs(rewardArgs);
         EventType eventType = EventType.PLAYER_LEVELUP;
 
-        List<VariableArg> variables = new ArrayList<>();
-        variables.add(new VariableArg("%old_level%", oldLevel+""));
-        variables.add(new VariableArg("%new_level%", newLevel+""));
+        MoArgs args = new MoArgs();
+        args.addVariableArg(
+                new VariableArg("%old_level%", oldLevel+""),
+                new VariableArg("%new_level%", newLevel+"")
+        );
+
         int times = 1;
-        RewardExecutor executor = new RewardExecutor(player, event, eventType, args, variables, times);
+        RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
         executor.execute();
     }
 }

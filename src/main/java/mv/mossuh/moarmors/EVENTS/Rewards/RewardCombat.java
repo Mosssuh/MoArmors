@@ -1,16 +1,17 @@
 package mv.mossuh.moarmors.EVENTS.Rewards;
 
-import mv.mossuh.moarmors.UTILITIES.vArgs;
+import mv.mossuh.moarmors.UTILITIES.MoArgs;
 import mv.mossuh.mocore.ENUMS.EventType;
 import mv.mossuh.mocore.UTILITIES.ARGS.RewardArgs.RewardArgs;
 import mv.mossuh.mocore.UTILITIES.ARGS.RewardArgs.RewardArgsType;
+import mv.mossuh.mocore.UTILITIES.ARGS.VariableArgs.VariableArg;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.*;
 
 import java.util.UUID;
 
@@ -23,12 +24,12 @@ public class RewardCombat implements Listener {
         if (player != null) {
             EventType eventType = EventType.PLAYER_KILLS;
 
-            vArgs args = new vArgs();
+            MoArgs args = new MoArgs();
             RewardArgs rewardArgs = new RewardArgs(RewardArgsType.LIVING_ENTITY, dead);
             args.setRewardArgs(rewardArgs);
 
             int times = 1;
-            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, null, times);
+            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
             executor.execute();
             if (executor.isCancelledDrops()) { event.getDrops().clear(); }
         }
@@ -36,22 +37,38 @@ public class RewardCombat implements Listener {
 
 
     @EventHandler
-    public void playerDieReward(EntityDeathEvent event) {
-        LivingEntity killer = event.getEntity().getKiller();
-        Entity deadEntity = event.getEntity();
-        if (deadEntity instanceof Player) {
-            Player player = (Player) deadEntity;
-            EventType eventType = EventType.PLAYER_DIE;
+    public void playerDieReward(PlayerDeathEvent event) {
+        Player player = event.getEntity();
+        EntityDamageEvent causeEvent = player.getLastDamageCause();
 
-            vArgs args = new vArgs();
-            RewardArgs rewardArgs = new RewardArgs(RewardArgsType.LIVING_ENTITY, killer);
-            args.setRewardArgs(rewardArgs);
+        int times = 1;
+        EventType eventType = EventType.PLAYER_DIE;
+        MoArgs args = new MoArgs();
 
-            int times = 1;
-            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, null, times);
-            executor.execute();
-            if (executor.isCancelledDrops()) { event.getDrops().clear(); }
+        if (causeEvent != null) {
+            EntityDamageEvent.DamageCause cause = causeEvent.getCause();
+            args.addVariableArg(
+                    new VariableArg("%cause%", cause.name()),
+                    new VariableArg("%base_damage%", causeEvent.getDamage()+""),
+                    new VariableArg("%final_damage%", causeEvent.getFinalDamage()+"")
+            );
         }
+
+        if (causeEvent instanceof EntityDamageByEntityEvent) {
+            EntityDamageByEntityEvent byEntityEvent = (EntityDamageByEntityEvent) causeEvent;
+            Entity entity = byEntityEvent.getDamager();
+            RewardArgs arg = new RewardArgs(RewardArgsType.ENTITY, entity);
+            args.setRewardArgs(arg);
+        } else if (causeEvent instanceof EntityDamageByBlockEvent) {
+            EntityDamageByBlockEvent byBlockEvent = (EntityDamageByBlockEvent) causeEvent;
+            Block entity = byBlockEvent.getDamager();
+            RewardArgs arg = new RewardArgs(RewardArgsType.BLOCK, entity);
+            args.setRewardArgs(arg);
+        }
+
+        RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
+        executor.execute();
+        if (executor.isCancelledDrops()) { event.getDrops().clear(); }
     }
 
     @EventHandler
@@ -65,12 +82,17 @@ public class RewardCombat implements Listener {
                 UUID uuid = player.getUniqueId();
                 EventType eventType = EventType.PLAYER_ATTACK;
 
-                vArgs args = new vArgs();
+                MoArgs args = new MoArgs();
                 RewardArgs rewardArgs = new RewardArgs(RewardArgsType.LIVING_ENTITY, attacked);
                 args.setRewardArgs(rewardArgs);
+                args.addVariableArg(
+                        new VariableArg("%cause%", event.getCause().name()),
+                        new VariableArg("%base_damage%", event.getDamage()+""),
+                        new VariableArg("%final_damage%", event.getFinalDamage()+"")
+                );
 
                 int times = 1;
-                RewardExecutor executor = new RewardExecutor(player, event, eventType, args, null, times);
+                RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
                 executor.execute();
                 if (executor.isCancelledEvent()) { event.setCancelled(true); }
             }
@@ -87,12 +109,17 @@ public class RewardCombat implements Listener {
                 Player player = (Player) attackedEntity;
                 EventType eventType = EventType.PLAYER_ATTACKED;
 
-                vArgs args = new vArgs();
+                MoArgs args = new MoArgs();
                 RewardArgs rewardArgs = new RewardArgs(RewardArgsType.LIVING_ENTITY, attacker);
                 args.setRewardArgs(rewardArgs);
+                args.addVariableArg(
+                        new VariableArg("%cause%", event.getCause().name()),
+                        new VariableArg("%base_damage%", event.getDamage()+""),
+                        new VariableArg("%final_damage%", event.getFinalDamage()+"")
+                );
 
                 int times = 1;
-                RewardExecutor executor = new RewardExecutor(player, event, eventType, args, null, times);
+                RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
                 executor.execute();
                 if (executor.isCancelledEvent()) { event.setCancelled(true); }
             }

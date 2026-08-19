@@ -233,7 +233,7 @@ public class PAPI extends PlaceholderExpansion {
                 }
 
                 BoosterType boosterType = mv.mossuh.moboosters.UTILITIES.UtilMethods.getBoosterType(boostV1[0]);
-                ApplicatorType applicatorType = mv.mossuh.moboosters.UTILITIES.UtilMethods.getApplicatorType(boostV1[1]);
+                ApplicatorType applicatorType = ApplicatorType.convert(boostV1[1]);
                 String boosted = boostV1[2];
 
                 BoosterIdentifier boosterIdentifier = new BoosterIdentifier(Config.PLUGIN_NAME, boosterType, applicatorType, boosted);
@@ -257,7 +257,7 @@ public class PAPI extends PlaceholderExpansion {
                     return "false";
                 }
                 BoosterType boosterType = mv.mossuh.moboosters.UTILITIES.UtilMethods.getBoosterType(boostV1[0]);
-                ApplicatorType applicatorType = mv.mossuh.moboosters.UTILITIES.UtilMethods.getApplicatorType(boostV1[1]);
+                ApplicatorType applicatorType = ApplicatorType.convert(boostV1[1]);
                 String boosted = boostV1[2];
 
                 BoosterIdentifier boosterIdentifier = new BoosterIdentifier(Config.PLUGIN_NAME, boosterType, applicatorType, boosted);

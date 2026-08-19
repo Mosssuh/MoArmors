@@ -1,6 +1,6 @@
 package mv.mossuh.moarmors.EVENTS.Rewards;
 
-import mv.mossuh.moarmors.UTILITIES.vArgs;
+import mv.mossuh.moarmors.UTILITIES.MoArgs;
 import mv.mossuh.mocore.ENUMS.EventType;
 import mv.mossuh.mocore.UTILITIES.ARGS.RewardArgs.RewardArgs;
 import mv.mossuh.mocore.UTILITIES.ARGS.RewardArgs.RewardArgsType;
@@ -21,14 +21,15 @@ public class RewardChat implements Listener {
         String command = event.getMessage();
         EventType eventType = EventType.PLAYER_COMMAND;
 
-        vArgs args = new vArgs();
+        MoArgs args = new MoArgs();
         RewardArgs rewardArgs = new RewardArgs(RewardArgsType.STRING, command);
         args.setRewardArgs(rewardArgs);
+        args.addVariableArg(
+                new VariableArg("%command%", command)
+        );
 
-        List<VariableArg> variables = new ArrayList<>();
-        variables.add(new VariableArg("%command%", command));
         int times = 1;
-        RewardExecutor executor = new RewardExecutor(player, event, eventType, args, variables, times);
+        RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
         executor.execute();
         if (executor.isCancelledEvent()) { event.setCancelled(true); }
     }
@@ -40,14 +41,15 @@ public class RewardChat implements Listener {
 
         EventType eventType = EventType.PLAYER_CHAT;
 
-        vArgs args = new vArgs();
+        MoArgs args = new MoArgs();
         RewardArgs rewardArgs = new RewardArgs(RewardArgsType.STRING, message);
         args.setRewardArgs(rewardArgs);
+        args.addVariableArg(
+                new VariableArg("%message%", message)
+        );
 
-        List<VariableArg> variables = new ArrayList<>();
-        variables.add(new VariableArg("%message%", message));
         int times = 1;
-        RewardExecutor executor = new RewardExecutor(player, event, eventType, args, variables, times);
+        RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
         executor.execute();
         if (executor.isCancelledEvent()) { event.setCancelled(true); }
     }

@@ -11,7 +11,7 @@ import mv.mossuh.moarmors.ENUMS.PieceType;
 import mv.mossuh.moarmors.MoArmors;
 import mv.mossuh.moarmors.UTILITIES.UtilMethods;
 import mv.mossuh.moarmors.UTILITIES.UtilString;
-import mv.mossuh.moarmors.UTILITIES.vArgs;
+import mv.mossuh.moarmors.UTILITIES.MoArgs;
 import mv.mossuh.mocore.ACTIONS.ActionUtil.MoAction;
 import mv.mossuh.mocore.ACTIONS.RewardUtil.AvailableRewards;
 import mv.mossuh.mocore.ACTIONS.RewardUtil.MoReward;
@@ -107,7 +107,7 @@ public class Rewards {
         ArmorIdentifier armorIdentifier = configArmor.getArmorIdentifier();
         Actions actions = configArmor.getActions();
 
-        vArgs args = actionResult.getArgs();
+        MoArgs args = actionResult.getArgs();
         List<VariableArg> variables = actionResult.getVariables();
 
         RewardArgs rewardArgs = args.getRewardArgs();
@@ -219,6 +219,8 @@ public class Rewards {
                                             }
                                         } else if (rewardType.equals(RewardType.CANCEL_MESSAGE)) {
                                             cancelMessage = true;
+                                        } else if (rewardType.equals(RewardType.convert("SET_DAMAGE"))) {
+                                            RewardMethods.setDamage(entityReceiver, Double.parseDouble(reward));
                                         }
                                     }
 

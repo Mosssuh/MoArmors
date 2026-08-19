@@ -6,7 +6,7 @@ import mv.mossuh.moarmors.CONFIGS.Armors.Armor.ConfigArmor;
 import mv.mossuh.moarmors.CONFIGS.Config.Config;
 import mv.mossuh.moarmors.ENUMS.DebugType;
 import mv.mossuh.moarmors.UTILITIES.UtilString;
-import mv.mossuh.moarmors.UTILITIES.vArgs;
+import mv.mossuh.moarmors.UTILITIES.MoArgs;
 import mv.mossuh.mocore.ACTIONS.ActionUtil.MoAction;
 import mv.mossuh.mocore.ACTIONS.OtherUtil.MoCooldown;
 import mv.mossuh.mocore.ACTIONS.RequirementUtil.MoRequirement;
@@ -42,11 +42,11 @@ public class Requirements {
     private Player player;
     private Armor armor = new Armor(null, null, null, null);
     private ConfigArmor configArmor = new ConfigArmor(null, null, null, null, null);
-    private vArgs args = new vArgs();
+    private MoArgs args = new MoArgs();
     private List<VariableArg> variables = new ArrayList<>();
     private ActionResult actionResult = new ActionResult(null, null, null, null, null, null, null, null);
 
-    public Requirements(Event event, EventType eventType, Player player, Armor armor, ConfigArmor configArmor, vArgs args) {
+    public Requirements(Event event, EventType eventType, Player player, Armor armor, ConfigArmor configArmor, MoArgs args) {
         this.event = event;
         if (eventType != null) { this.eventType = eventType; }
         this.player = player;

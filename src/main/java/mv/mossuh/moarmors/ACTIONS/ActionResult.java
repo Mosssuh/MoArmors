@@ -2,7 +2,7 @@ package mv.mossuh.moarmors.ACTIONS;
 
 import mv.mossuh.moarmors.ARMORS.Armor.Armor;
 import mv.mossuh.moarmors.CONFIGS.Armors.Armor.ConfigArmor;
-import mv.mossuh.moarmors.UTILITIES.vArgs;
+import mv.mossuh.moarmors.UTILITIES.MoArgs;
 import mv.mossuh.mocore.ACTIONS.RewardUtil.MoRewards;
 import mv.mossuh.mocore.ENUMS.EventType;
 import mv.mossuh.mocore.UTILITIES.ARGS.VariableArgs.VariableArg;
@@ -18,11 +18,11 @@ public class ActionResult {
     private Player player;
     private Armor armor = new Armor(null, null, null, null);
     private ConfigArmor configArmor = new ConfigArmor(null, null, null, null, null);
-    private vArgs args = new vArgs();
+    private MoArgs args = new MoArgs();
     private List<VariableArg> variables = new ArrayList<>();
     private List<MoRewards> approvedRewards = new ArrayList<>();
     private boolean hasRewards = false;
-    public ActionResult(Event event, EventType eventType, Player player, Armor armor, ConfigArmor configArmor, vArgs args, List<VariableArg> variables, List<MoRewards> approvedRewards) {
+    public ActionResult(Event event, EventType eventType, Player player, Armor armor, ConfigArmor configArmor, MoArgs args, List<VariableArg> variables, List<MoRewards> approvedRewards) {
         this.event = event;
         if (eventType != null) { this.eventType = eventType; }
         this.player = player;
@@ -39,7 +39,7 @@ public class ActionResult {
     public Player getPlayer() { return player; }
     public Armor getArmor() { return armor; }
     public ConfigArmor getConfigArmor() { return configArmor; }
-    public vArgs getArgs() { return args; }
+    public MoArgs getArgs() { return args; }
     public List<VariableArg> getVariables() { return variables; }
     public List<MoRewards> getApprovedRewards() { return approvedRewards; }
     public boolean hasApprovedRewards() { return hasRewards; }

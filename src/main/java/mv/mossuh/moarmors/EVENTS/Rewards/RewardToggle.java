@@ -1,6 +1,6 @@
 package mv.mossuh.moarmors.EVENTS.Rewards;
 
-import mv.mossuh.moarmors.UTILITIES.vArgs;
+import mv.mossuh.moarmors.UTILITIES.MoArgs;
 import mv.mossuh.mocore.ENUMS.EventType;
 import mv.mossuh.mocore.UTILITIES.ARGS.RewardArgs.RewardArgs;
 import mv.mossuh.mocore.UTILITIES.ARGS.RewardArgs.RewardArgsType;
@@ -15,10 +15,6 @@ public class RewardToggle implements Listener {
     @EventHandler
     public void playerFlyReward(PlayerToggleFlightEvent event) {
         Player player = event.getPlayer();
-
-        vArgs args = new vArgs();
-        RewardArgs rewardArgs = new RewardArgs(RewardArgsType.NONE);
-        args.setRewardArgs(rewardArgs);
         EventType eventType;
         if (!player.isFlying()) {
             eventType = EventType.PLAYER_FLY;
@@ -27,7 +23,7 @@ public class RewardToggle implements Listener {
         }
 
         int times = 1;
-        RewardExecutor executor = new RewardExecutor(player, event, eventType, args, null, times);
+        RewardExecutor executor = new RewardExecutor(player, event, eventType, null, times);
         executor.execute();
         if (executor.isCancelledEvent()) { event.setCancelled(true); }
     }
@@ -35,10 +31,6 @@ public class RewardToggle implements Listener {
     @EventHandler
     public void playerSneakReward(PlayerToggleSneakEvent event) {
         Player player = event.getPlayer();
-
-        vArgs args = new vArgs();
-        RewardArgs rewardArgs = new RewardArgs(RewardArgsType.NONE);
-        args.setRewardArgs(rewardArgs);
         EventType eventType;
         if (!player.isSneaking()) {
             eventType = EventType.PLAYER_SNEAK;
@@ -47,7 +39,7 @@ public class RewardToggle implements Listener {
         }
 
         int times = 1;
-        RewardExecutor executor = new RewardExecutor(player, event, eventType, args, null, times);
+        RewardExecutor executor = new RewardExecutor(player, event, eventType, null, times);
         executor.execute();
         if (executor.isCancelledEvent()) { event.setCancelled(true); }
     }
@@ -55,10 +47,6 @@ public class RewardToggle implements Listener {
     @EventHandler
     public void playerSprintReward(PlayerToggleSprintEvent event) {
         Player player = event.getPlayer();
-
-        vArgs args = new vArgs();
-        RewardArgs rewardArgs = new RewardArgs(RewardArgsType.NONE);
-        args.setRewardArgs(rewardArgs);
         EventType eventType;
         if (!player.isSprinting()) {
             eventType = EventType.PLAYER_SPRINT;
@@ -67,7 +55,7 @@ public class RewardToggle implements Listener {
         }
 
         int times = 1;
-        RewardExecutor executor = new RewardExecutor(player, event, eventType, args, null, times);
+        RewardExecutor executor = new RewardExecutor(player, event, eventType, null, times);
         executor.execute();
         if (executor.isCancelledEvent()) { event.setCancelled(true); }
     }

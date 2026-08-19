@@ -1,6 +1,6 @@
 package mv.mossuh.moarmors.EVENTS.Rewards;
 
-import mv.mossuh.moarmors.UTILITIES.vArgs;
+import mv.mossuh.moarmors.UTILITIES.MoArgs;
 import mv.mossuh.mocore.ENUMS.EventType;
 import mv.mossuh.mocore.UTILITIES.ARGS.RewardArgs.RewardArgs;
 import mv.mossuh.mocore.UTILITIES.ARGS.RewardArgs.RewardArgsType;
@@ -20,16 +20,15 @@ public class RewardWorld implements Listener {
         String fromWorld = event.getFrom().getName();
         String toWorld = event.getPlayer().getWorld().getName();
 
-        vArgs args = new vArgs();
-        RewardArgs rewardArgs = new RewardArgs(RewardArgsType.STRING, toWorld);
-        args.setRewardArgs(rewardArgs);
+        MoArgs args = new MoArgs();
         EventType eventType = EventType.PLAYER_CHANGE_WORLD;
+        args.addVariableArg(
+                new VariableArg("%to_world%", toWorld),
+                new VariableArg("%from_world%", fromWorld)
+        );
 
-        List<VariableArg> variables = new ArrayList<>();
-        variables.add(new VariableArg("%to_world%", toWorld));
-        variables.add(new VariableArg("%from_world%", fromWorld));
         int times = 1;
-        RewardExecutor executor = new RewardExecutor(player, event, eventType, args, variables, times);
+        RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
         executor.execute();
     }
 }

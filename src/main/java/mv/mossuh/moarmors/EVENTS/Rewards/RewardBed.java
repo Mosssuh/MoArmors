@@ -1,6 +1,6 @@
 package mv.mossuh.moarmors.EVENTS.Rewards;
 
-import mv.mossuh.moarmors.UTILITIES.vArgs;
+import mv.mossuh.moarmors.UTILITIES.MoArgs;
 import mv.mossuh.mocore.ENUMS.EventType;
 import mv.mossuh.mocore.UTILITIES.ARGS.RewardArgs.RewardArgs;
 import mv.mossuh.mocore.UTILITIES.ARGS.RewardArgs.RewardArgsType;
@@ -17,12 +17,8 @@ public class RewardBed implements Listener {
 
         EventType eventType = EventType.PLAYER_BED_ENTER;
 
-        vArgs args = new vArgs();
-        RewardArgs rewardArgs = new RewardArgs(RewardArgsType.NONE);
-        args.setRewardArgs(rewardArgs);
-
         int times = 1;
-        RewardExecutor executor = new RewardExecutor(player, event, eventType, args, null, times);
+        RewardExecutor executor = new RewardExecutor(player, event, eventType, null, times);
         executor.execute();
         if (executor.isCancelledEvent()) { event.setCancelled(true); }
     }
@@ -33,12 +29,8 @@ public class RewardBed implements Listener {
 
         EventType eventType = EventType.PLAYER_BED_LEAVE;
 
-        vArgs args = new vArgs();
-        RewardArgs rewardArgs = new RewardArgs(RewardArgsType.NONE);
-        args.setRewardArgs(rewardArgs);
-
         int times = 1;
-        RewardExecutor executor = new RewardExecutor(player, event, eventType, args, null, times);
+        RewardExecutor executor = new RewardExecutor(player, event, eventType, null, times);
         executor.execute();
     }
 }

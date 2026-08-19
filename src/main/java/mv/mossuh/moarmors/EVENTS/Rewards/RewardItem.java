@@ -1,6 +1,6 @@
 package mv.mossuh.moarmors.EVENTS.Rewards;
 
-import mv.mossuh.moarmors.UTILITIES.vArgs;
+import mv.mossuh.moarmors.UTILITIES.MoArgs;
 import mv.mossuh.mocore.ENUMS.EventType;
 import mv.mossuh.mocore.EVENTS.ItemSelectEvent.ItemSelectEvent;
 import mv.mossuh.mocore.UTILITIES.ARGS.RewardArgs.RewardArgs;
@@ -27,13 +27,13 @@ public class RewardItem implements Listener {
         ItemStack itemConsume = event.getItem();
 
         if (itemConsume.getType() != Material.AIR) {
-            vArgs args = new vArgs();
+            MoArgs args = new MoArgs();
             RewardArgs rewardArgs = new RewardArgs(RewardArgsType.ITEMSTACK, itemConsume);
             args.setRewardArgs(rewardArgs);
             EventType eventType = EventType.ITEM_CONSUME;
 
             int times = 1;
-            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, null, times);
+            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
             executor.execute();
             if (executor.isCancelledEvent()) { event.setCancelled(true); }
         }
@@ -45,13 +45,13 @@ public class RewardItem implements Listener {
         ItemStack itemBroken = event.getBrokenItem();
 
         if (itemBroken.getType() != Material.AIR) {
-            vArgs args = new vArgs();
+            MoArgs args = new MoArgs();
             RewardArgs rewardArgs = new RewardArgs(RewardArgsType.ITEMSTACK, itemBroken);
             args.setRewardArgs(rewardArgs);
             EventType eventType = EventType.ITEM_BREAK;
 
             int times = 1;
-            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, null, times);
+            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
             executor.execute();
         }
     }
@@ -62,13 +62,13 @@ public class RewardItem implements Listener {
         ItemStack itemPicked = event.getItem().getItemStack();
 
         if (itemPicked.getType() != Material.AIR) {
-            vArgs args = new vArgs();
+            MoArgs args = new MoArgs();
             RewardArgs rewardArgs = new RewardArgs(RewardArgsType.ITEMSTACK, itemPicked);
             args.setRewardArgs(rewardArgs);
             EventType eventType = EventType.ITEM_PICKUP;
 
             int times = 1;
-            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, null, times);
+            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
             executor.execute();
             if (executor.isCancelledEvent()) { event.setCancelled(true); }
         }
@@ -80,13 +80,13 @@ public class RewardItem implements Listener {
         ItemStack itemDropped = event.getItemDrop().getItemStack();
 
         if (itemDropped.getType() != Material.AIR) {
-            vArgs args = new vArgs();
+            MoArgs args = new MoArgs();
             RewardArgs rewardArgs = new RewardArgs(RewardArgsType.ITEMSTACK, itemDropped);
             args.setRewardArgs(rewardArgs);
             EventType eventType = EventType.ITEM_DROP;
 
             int times = 1;
-            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, null, times);
+            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
             executor.execute();
             if (executor.isCancelledEvent()) { event.setCancelled(true); }
         }
@@ -98,13 +98,13 @@ public class RewardItem implements Listener {
         ItemStack itemHeld = event.getPlayer().getInventory().getItem(event.getNewSlot());
 
         if (itemHeld != null && itemHeld.getType() != Material.AIR) {
-            vArgs args = new vArgs();
+            MoArgs args = new MoArgs();
             RewardArgs rewardArgs = new RewardArgs(RewardArgsType.ITEMSTACK, itemHeld);
             args.setRewardArgs(rewardArgs);
             EventType eventType = EventType.ITEM_HELD;
 
             int times = 1;
-            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, null, times);
+            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
             executor.execute();
             if (executor.isCancelledEvent()) { event.setCancelled(true); }
         }
@@ -116,13 +116,13 @@ public class RewardItem implements Listener {
         ItemStack itemUnHeld = event.getPlayer().getInventory().getItem(event.getPreviousSlot());
 
         if (itemUnHeld != null && itemUnHeld.getType() != Material.AIR) {
-            vArgs args = new vArgs();
+            MoArgs args = new MoArgs();
             RewardArgs rewardArgs = new RewardArgs(RewardArgsType.ITEMSTACK, itemUnHeld);
             args.setRewardArgs(rewardArgs);
             EventType eventType = EventType.ITEM_UNHELD;
 
             int times = 1;
-            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, null, times);
+            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
             executor.execute();
             if (executor.isCancelledEvent()) { event.setCancelled(true); }
         }
@@ -135,25 +135,25 @@ public class RewardItem implements Listener {
         ItemStack unSelectedItem = event.getUnSelectedItem();
 
         if (selectedItem != null && !selectedItem.getType().equals(Material.AIR)) {
-            vArgs args = new vArgs();
+            MoArgs args = new MoArgs();
             RewardArgs rewardArgs = new RewardArgs(RewardArgsType.ITEMSTACK, selectedItem);
             args.setRewardArgs(rewardArgs);
             EventType eventType = EventType.ITEM_SELECT;
 
             int times = 1;
-            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, null, times);
+            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
             executor.execute();
             if (executor.isCancelledEvent()) { event.setCancelled(true); }
         }
 
         if (unSelectedItem != null && !unSelectedItem.getType().equals(Material.AIR)) {
-            vArgs args = new vArgs();
+            MoArgs args = new MoArgs();
             RewardArgs rewardArgs = new RewardArgs(RewardArgsType.ITEMSTACK, unSelectedItem);
             args.setRewardArgs(rewardArgs);
             EventType eventType = EventType.ITEM_UNSELECT;
 
             int times = 1;
-            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, null, times);
+            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
             executor.execute();
             if (executor.isCancelledEvent()) { event.setCancelled(true); }
         }
@@ -167,15 +167,16 @@ public class RewardItem implements Listener {
         int expCost = event.getExpLevelCost();
 
         if (!itemStack.getType().equals(Material.AIR)) {
-            vArgs args = new vArgs();
+            MoArgs args = new MoArgs();
             RewardArgs rewardArgs = new RewardArgs(RewardArgsType.ITEMSTACK, itemStack);
             args.setRewardArgs(rewardArgs);
             EventType eventType = EventType.ITEM_ENCHANT;
+            args.addVariableArg(
+                    new VariableArg("%exp_cost%", expCost+"")
+            );
 
-            List<VariableArg> variables = new ArrayList<>();
-            variables.add(new VariableArg("%exp_cost%", expCost+""));
             int times = 1;
-            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, variables, times);
+            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
             executor.execute();
             if (executor.isCancelledEvent()) { event.setCancelled(true); }
         }
@@ -190,12 +191,12 @@ public class RewardItem implements Listener {
             ItemStack craftItem = event.getCurrentItem();
             EventType eventType = EventType.ITEM_CRAFT;
 
-            vArgs args = new vArgs();
+            MoArgs args = new MoArgs();
             RewardArgs rewardArgs = new RewardArgs(RewardArgsType.ITEMSTACK, craftItem);
             args.setRewardArgs(rewardArgs);
 
             int times = 1;
-            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, null, times);
+            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
             executor.execute();
             if (executor.isCancelledEvent()) { event.setCancelled(true); }
         }

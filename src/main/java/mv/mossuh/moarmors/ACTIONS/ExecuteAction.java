@@ -6,7 +6,7 @@ import mv.mossuh.moarmors.CONFIGS.Armors.Armor.ConfigArmor;
 import mv.mossuh.moarmors.CONFIGS.Armors.ItemInfo.ArmorUtil.ArmorIdentifier;
 import mv.mossuh.moarmors.CONFIGS.Config.Config;
 import mv.mossuh.moarmors.UTILITIES.UtilString;
-import mv.mossuh.moarmors.UTILITIES.vArgs;
+import mv.mossuh.moarmors.UTILITIES.MoArgs;
 import mv.mossuh.mocore.ACTIONS.ActionUtil.MoAction;
 import mv.mossuh.mocore.ACTIONS.OtherUtil.MoCooldown;
 import mv.mossuh.mocore.ACTIONS.RequirementUtil.MoRequirement;
@@ -38,7 +38,7 @@ public class ExecuteAction {
     private Player player;
     private Armor armor = new Armor(null, null, null, null);
     private ConfigArmor configArmor = new ConfigArmor(null, null, null, null, null);
-    private vArgs args = new vArgs();
+    private MoArgs args = new MoArgs();
     private List<VariableArg> variables = new ArrayList<>();
     private ActionResult actionResult = new ActionResult(null, null, null, null, null, null, null, null);
 
@@ -46,7 +46,7 @@ public class ExecuteAction {
     private boolean cancelEvent = false;
     private boolean cancelMessage = false;
     private boolean cancelDrops = false;
-    public ExecuteAction(MoAction moAction, Event event, EventType eventType, Player player, Armor armor, ConfigArmor configArmor, vArgs args) {
+    public ExecuteAction(MoAction moAction, Event event, EventType eventType, Player player, Armor armor, ConfigArmor configArmor, MoArgs args) {
         if (moAction != null) { this.moAction = moAction; }
         this.event = event;
         if (eventType != null) { this.eventType = eventType; }

@@ -8,7 +8,7 @@ import mv.mossuh.moarmors.ARMORS.Armor.Armor;
 import mv.mossuh.moarmors.ARMORS.Armor.ArmorPlayer;
 import mv.mossuh.moarmors.CONFIGS.Armors.Actions.DefaultActions;
 import mv.mossuh.moarmors.CONFIGS.Armors.Armor.ConfigArmor;
-import mv.mossuh.moarmors.UTILITIES.vArgs;
+import mv.mossuh.moarmors.UTILITIES.MoArgs;
 import mv.mossuh.mocore.ENUMS.EventType;
 import mv.mossuh.mocore.UTILITIES.ARGS.RewardArgs.RewardArgs;
 import mv.mossuh.mocore.UTILITIES.ARGS.RewardArgs.RewardArgsType;
@@ -19,8 +19,6 @@ import org.bukkit.event.Event;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class RewardExecutor {
     private boolean cancelEvent = false;
@@ -32,15 +30,13 @@ public class RewardExecutor {
     private Player player = null;
     private Event event = null;
     private EventType eventType = EventType.INVALID;
-    private vArgs args = new vArgs();
-    private List<VariableArg> variables = new ArrayList<>();
+    private MoArgs args = new MoArgs();
     private int times = 1;
-    public RewardExecutor(Player player, Event event, EventType eventType, vArgs args, List<VariableArg> variables, Integer times) {
+    public RewardExecutor(Player player, Event event, EventType eventType, MoArgs args, Integer times) {
         this.player = player;
         this.event = event;
         if (eventType != null) { this.eventType = eventType; }
         if (args != null) { this.args = args; }
-        if (variables != null) { this.variables = variables; }
         if (times != null) { this.times = times; }
     }
 
@@ -48,6 +44,7 @@ public class RewardExecutor {
         UUID uuid = player.getUniqueId();
         RewardArgs rewardArgs = args.getRewardArgs();
         RewardArgsType rewardArgsType = rewardArgs.getArgumentType();
+        List<VariableArg> variables = args.getVariableArgs();
 
         ArmorPlayer armorPlayer = ArmorsAPI.getManager().getPlayer(uuid);
         if (armorPlayer.isPlayer() && armorPlayer.hasArmor()) {
@@ -76,8 +73,6 @@ public class RewardExecutor {
                             break;
                         case LIVING_ENTITY:
                             requirements.addLivingEntityVariables();
-                            break;
-                        case ITEM:
                             break;
                     }
 

@@ -1,6 +1,6 @@
 package mv.mossuh.moarmors.EVENTS.Rewards;
 
-import mv.mossuh.moarmors.UTILITIES.vArgs;
+import mv.mossuh.moarmors.UTILITIES.MoArgs;
 import mv.mossuh.mocore.ENUMS.EventType;
 import mv.mossuh.mocore.EVENTS.ArmorEquipEvent.ArmorEquipEvent;
 import mv.mossuh.mocore.UTILITIES.ARGS.RewardArgs.RewardArgs;
@@ -41,16 +41,16 @@ public class RewardEquipUnEquipArmor implements Listener {
 
 
         if (newPiece != null && !newPiece.getType().equals(Material.AIR)) {
-            vArgs args = new vArgs();
+            MoArgs args = new MoArgs();
             RewardArgs rewardArgs = new RewardArgs(RewardArgsType.ITEMSTACK, selectedItem);
             args.setRewardArgs(rewardArgs);
-
-            List<VariableArg> variables = new ArrayList<>();
-            variables.add(new VariableArg("%piece_type%", armorType));
-            variables.add(new VariableArg("%equip_type%", equipType));
+            args.addVariableArg(
+                    new VariableArg("%piece_type%", armorType),
+                    new VariableArg("%equip_type%", equipType)
+            );
 
             int times = 1;
-            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, variables, times);
+            RewardExecutor executor = new RewardExecutor(player, event, eventType, args, times);
             executor.execute();
             if (executor.isCancelledEvent()) { event.setCancelled(true); }
         }
