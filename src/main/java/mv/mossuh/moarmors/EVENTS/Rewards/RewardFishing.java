@@ -18,14 +18,7 @@ public class RewardFishing implements Listener {
         Player player = event.getPlayer();
         Entity caught = event.getCaught();
         PlayerFishEvent.State state = event.getState();
-        EventType eventType = EventType.NONE;
-        if (state.equals(PlayerFishEvent.State.CAUGHT_FISH)) {
-            eventType = EventType.PLAYER_CAUGHT_FISH;
-        } else if (state.equals(PlayerFishEvent.State.CAUGHT_ENTITY)){
-            eventType = EventType.PLAYER_CAUGHT_ENTITY;
-        } else {
-            eventType = EventType.convert("PLAYER_CAUGHT", true, false);
-        }
+        EventType eventType = EventType.convert("PLAYER_CAUGHT", true, false);
 
         int times = 1;
         MoArgs args = new MoArgs();

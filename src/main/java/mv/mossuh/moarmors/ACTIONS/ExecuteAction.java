@@ -36,11 +36,10 @@ public class ExecuteAction {
     private Event event;
     private EventType eventType = EventType.NONE;
     private Player player;
-    private Armor armor = new Armor(null, null, null, null);
-    private ConfigArmor configArmor = new ConfigArmor(null, null, null, null, null);
+    private Armor armor = new Armor();
+    private ConfigArmor configArmor = new ConfigArmor();
     private MoArgs args = new MoArgs();
-    private List<VariableArg> variables = new ArrayList<>();
-    private ActionResult actionResult = new ActionResult(null, null, null, null, null, null, null, null);
+    private ActionResult actionResult = new ActionResult();
 
 
     private boolean cancelEvent = false;
@@ -62,17 +61,17 @@ public class ExecuteAction {
     public boolean cancelMessage() { return cancelMessage; }
 
     public ExecuteAction addVariables(VariableArg... variables) {
-        this.variables.addAll(Arrays.asList(variables));
+        this.args.getVariableArgs().addAll(Arrays.asList(variables));
         return this;
     }
 
     public ExecuteAction addVariables(List<VariableArg> variables) {
-        this.variables.addAll(variables);
+        this.args.getVariableArgs().addAll(variables);
         return this;
     }
 
     public ExecuteAction addPlayerVariables() {
-        this.variables.addAll(DefaultVariables.player(player));
+        this.args.getVariableArgs().addAll(DefaultVariables.player(player));
         return this;
     }
 
@@ -80,7 +79,7 @@ public class ExecuteAction {
         RewardArgs rewardArgs = this.args.getRewardArgs();
         if (rewardArgs.getArgumentType().equals(RewardArgsType.ITEMSTACK)) {
             ItemStack itemStack = rewardArgs.getItemStack();
-            this.variables.addAll(DefaultVariables.itemStack(itemStack));
+            this.args.getVariableArgs().addAll(DefaultVariables.itemStack(itemStack));
         }
         return this;
     }
@@ -89,13 +88,13 @@ public class ExecuteAction {
         RewardArgs rewardArgs = this.args.getRewardArgs();
         if (rewardArgs.getArgumentType().equals(RewardArgsType.BLOCK)) {
             Block block = rewardArgs.getBlock();
-            this.variables.addAll(DefaultVariables.block(block));
+            this.args.getVariableArgs().addAll(DefaultVariables.block(block));
         }
         return this;
     }
 
     public ExecuteAction addArmorVariables() {
-        this.variables.addAll(DefaultVariables.armor(armor));
+        this.args.getVariableArgs().addAll(DefaultVariables.armor(armor));
         return this;
     }
 
@@ -104,7 +103,7 @@ public class ExecuteAction {
 
         if (rewardArgs.getArgumentType().equals(RewardArgsType.ENTITY)) {
             Entity entity = rewardArgs.getEntity();
-            this.variables.addAll(DefaultVariables.entity(entity));
+            this.args.getVariableArgs().addAll(DefaultVariables.entity(entity));
         }
         return this;
     }
@@ -113,7 +112,7 @@ public class ExecuteAction {
         RewardArgs rewardArgs = this.args.getRewardArgs();
         if (rewardArgs.getArgumentType().equals(RewardArgsType.LIVING_ENTITY)) {
             LivingEntity entity = rewardArgs.getLivingEntity();
-            this.variables.addAll(DefaultVariables.livingEntity(entity));
+            this.args.getVariableArgs().addAll(DefaultVariables.livingEntity(entity));
         }
         return this;
     }
@@ -123,7 +122,7 @@ public class ExecuteAction {
         if (this.args.getCommandArgs().hasArgs()) {
             int size = commandArgs.getArgs().size();
             for (int i = 0; i < size; i++) {
-                this.variables.add(new VariableArg("%args_" + (i+1)  + "%", commandArgs.getArg(i)));
+                this.args.getVariableArgs().add(new VariableArg("%args_" + (i+1)  + "%", commandArgs.getArg(i)));
             }
         }
         return this;
@@ -132,6 +131,7 @@ public class ExecuteAction {
     public ExecuteAction check() {
         UUID uuid = player.getUniqueId();
 
+        List<VariableArg> variables = args.getVariableArgs();
         MoRequirements vRequirements = moAction.getRequirements();
         List<MoRequirement> vRequirementList = vRequirements.getRequirements();
         int requirementsAmount = vRequirementList.size();
@@ -199,7 +199,7 @@ public class ExecuteAction {
             if (requirementsAccepted == requirementsAmount) {
                 MoRewards moRewards = new MoRewards(moAction.getRewards().getRewards(), null);
                 moRewards.addVariables(actionVariables);
-                actionResult = new ActionResult(event, eventType, player, armor, configArmor, args, variables, new ArrayList<>(Collections.singletonList(moRewards)));
+                actionResult = new ActionResult(event, eventType, player, armor, configArmor, args, new ArrayList<>(Collections.singletonList(moRewards)));
                 Rewards rewards = new Rewards(actionResult).executeDefault().executeArmor().executeVariables().check();
                 if (rewards.cancelEvent()) { this.cancelEvent = true; }
                 if (rewards.cancelDrops()) { this.cancelDrops = true; }
@@ -207,7 +207,7 @@ public class ExecuteAction {
             } else {
                 MoRewards moRewards = new MoRewards(moAction.getElseRewards().getRewards(), null);
                 moRewards.addVariables(actionVariables);
-                actionResult = new ActionResult(event, eventType, player, armor, configArmor, args, variables, new ArrayList<>(Collections.singletonList(moRewards)));
+                actionResult = new ActionResult(event, eventType, player, armor, configArmor, args, new ArrayList<>(Collections.singletonList(moRewards)));
                 Rewards rewards = new Rewards(actionResult).executeDefault().executeArmor().executeVariables().check();
                 if (rewards.cancelEvent()) { this.cancelEvent = true; }
                 if (rewards.cancelDrops()) { this.cancelDrops = true; }

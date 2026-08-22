@@ -22,6 +22,7 @@ public class Armor {
         if (boots != null) { this.boots = boots; }
         updateConfigs();
     }
+    public Armor() {}
 
     public boolean hasPiece() {
         return helmet.isPiece() || chestplate.isPiece() || leggings.isPiece() || boots.isPiece();

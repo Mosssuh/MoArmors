@@ -1,5 +1,5 @@
 name: MoArmors
-version: '0.0.2'
+version: '0.0.3'
 main: mv.mossuh.moarmors.MoArmors
 api-version: '1.13'
 

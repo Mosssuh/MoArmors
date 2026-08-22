@@ -40,11 +40,10 @@ public class Requirements {
     private Event event;
     private EventType eventType = EventType.NONE;
     private Player player;
-    private Armor armor = new Armor(null, null, null, null);
-    private ConfigArmor configArmor = new ConfigArmor(null, null, null, null, null);
+    private Armor armor = new Armor();
+    private ConfigArmor configArmor = new ConfigArmor();
     private MoArgs args = new MoArgs();
-    private List<VariableArg> variables = new ArrayList<>();
-    private ActionResult actionResult = new ActionResult(null, null, null, null, null, null, null, null);
+    private ActionResult actionResult = new ActionResult();
 
     public Requirements(Event event, EventType eventType, Player player, Armor armor, ConfigArmor configArmor, MoArgs args) {
         this.event = event;
@@ -56,17 +55,17 @@ public class Requirements {
     }
 
     public Requirements addVariables(VariableArg... variables) {
-        this.variables.addAll(Arrays.asList(variables));
+        this.args.getVariableArgs().addAll(Arrays.asList(variables));
         return this;
     }
 
     public Requirements addVariables(List<VariableArg> variables) {
-        this.variables.addAll(variables);
+        this.args.getVariableArgs().addAll(variables);
         return this;
     }
 
     public Requirements addPlayerVariables() {
-        this.variables.addAll(DefaultVariables.player(player));
+        this.args.getVariableArgs().addAll(DefaultVariables.player(player));
         return this;
     }
 
@@ -74,7 +73,7 @@ public class Requirements {
         RewardArgs rewardArgs = this.args.getRewardArgs();
         if (rewardArgs.getArgumentType().equals(RewardArgsType.ITEMSTACK)) {
             ItemStack itemStack = rewardArgs.getItemStack();
-            this.variables.addAll(DefaultVariables.itemStack(itemStack));
+            this.args.getVariableArgs().addAll(DefaultVariables.itemStack(itemStack));
         }
         return this;
     }
@@ -83,13 +82,13 @@ public class Requirements {
         RewardArgs rewardArgs = this.args.getRewardArgs();
         if (rewardArgs.getArgumentType().equals(RewardArgsType.BLOCK)) {
             Block block = rewardArgs.getBlock();
-            this.variables.addAll(DefaultVariables.block(block));
+            this.args.getVariableArgs().addAll(DefaultVariables.block(block));
         }
         return this;
     }
 
     public Requirements addArmorVariables() {
-        this.variables.addAll(DefaultVariables.armor(armor));
+        this.args.getVariableArgs().addAll(DefaultVariables.armor(armor));
         return this;
     }
 
@@ -97,7 +96,7 @@ public class Requirements {
         RewardArgs rewardArgs = this.args.getRewardArgs();
         if (rewardArgs.getArgumentType().equals(RewardArgsType.ENTITY)) {
             Entity entity = rewardArgs.getEntity();
-            this.variables.addAll(DefaultVariables.entity(entity));
+            this.args.getVariableArgs().addAll(DefaultVariables.entity(entity));
         }
         return this;
     }
@@ -106,7 +105,7 @@ public class Requirements {
         RewardArgs rewardArgs = this.args.getRewardArgs();
         if (rewardArgs.getArgumentType().equals(RewardArgsType.LIVING_ENTITY)) {
             LivingEntity entity = rewardArgs.getLivingEntity();
-            this.variables.addAll(DefaultVariables.livingEntity(entity));
+            this.args.getVariableArgs().addAll(DefaultVariables.livingEntity(entity));
         }
         return this;
     }
@@ -116,7 +115,7 @@ public class Requirements {
         if (this.args.getCommandArgs().hasArgs()) {
             int size = commandArgs.getArgs().size();
             for (int i = 0; i < size; i++) {
-                this.variables.add(new VariableArg("%args_" + (i+1)  + "%", commandArgs.getArg(i)));
+                this.args.getVariableArgs().add(new VariableArg("%args_" + (i+1)  + "%", commandArgs.getArg(i)));
             }
         }
         return this;
@@ -125,6 +124,7 @@ public class Requirements {
 
     public Requirements check() {
         List<MoAction> actionList = configArmor.getActions().getDefaultActions().getActions();
+        List<VariableArg> variables = args.getVariableArgs();
 
         UUID uuid = player.getUniqueId();
 
@@ -222,7 +222,7 @@ public class Requirements {
                 }
             }
         }
-        actionResult = new ActionResult(event, eventType, player, armor, configArmor, args, variables, approvedRewards);
+        actionResult = new ActionResult(event, eventType, player, armor, configArmor, args, approvedRewards);
         return this;
     }
 

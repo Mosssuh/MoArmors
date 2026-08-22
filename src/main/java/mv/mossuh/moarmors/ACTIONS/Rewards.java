@@ -45,7 +45,7 @@ public class Rewards {
     private boolean cancelDrops = false;
     private boolean cancelMessage = false;
 
-    private ActionResult actionResult = new ActionResult(null, null, null, null, null, null, null, null);
+    private ActionResult actionResult = new ActionResult();
     private int times = 1;
 
 
@@ -108,7 +108,7 @@ public class Rewards {
         Actions actions = configArmor.getActions();
 
         MoArgs args = actionResult.getArgs();
-        List<VariableArg> variables = actionResult.getVariables();
+        List<VariableArg> variables = args.getVariableArgs();
 
         RewardArgs rewardArgs = args.getRewardArgs();
         RewardArgsType rewardArgsType = rewardArgs.getArgumentType();
